@@ -58,5 +58,6 @@ class CtrMain extends CI_Controller {
 		$modelEvents->addEvent($imeDogodka, $prostorDogodka, $zacetekDogodka, $trajanjeDogodka, $opisDogodka);
 		
 		
+		
 	}
 }
