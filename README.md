@@ -31,6 +31,7 @@
 4. na git repozitoriju kopirajte naslov povezave (pod clone & download) >> next
 5. obklukate vse prikazane dokumente >> next
 6. v polju Directory izberete browse in izberete datoteko www na lokaciji, kamor ste namestili wamp (privzeta lokacija: C:\wamp\www)>>finish
+
 7.da preverite, če so pruisotne vse datoteke stisnete z desnim gumbom miške na prikazano ime projekta in nato opcijo Pull. Prikazano okno zaprete.
 8.ob zagonu wamp se mora v orodni vrstici spodaj desno prikazati zelena ikona. na njo stisnete z desnim gumbom miške in izberete opcijo Refresh oz. Osveži
 9.nato ponovno stisnete na zeleno ikono programa wamp z levo tipko miške in izberete opcijo Localhost
