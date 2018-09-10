@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteBase /Dogodki_praktikum/
+RewriteCond $1 !^(index\.php|css|\.php)
+
+RewriteRule ^(.*)$ /Dogodki_praktikum/index.php?/$1 [L]
+
+Options All -Indexes
