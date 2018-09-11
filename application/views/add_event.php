@@ -23,7 +23,7 @@
 			<br/>
 			<br/>
 			
-			<label>Zaèetek dogodka</label>
+			<label>ZaÄetek dogodka</label>
 			<input type="text" name="zacetekDogodka" id="zacetekDogodka" required>
 			
 			<br/>
