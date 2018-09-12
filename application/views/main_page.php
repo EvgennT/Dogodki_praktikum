@@ -44,6 +44,22 @@
 					<td><?php echo date('d/m/Y H:i', $dogodek->zacetek);  //date nam pretvori timestamp v datum podanega formata ?></td>
 					<td><?php echo date('d/m/Y H:i', $dogodek->trajanje); ?></td>
 					<td><?php echo date('d/m/Y H:i', $dogodek->termin);?></td>
+					
+					<td>
+					<?php 
+					
+					if($dogodek->slika != "")//če ima dogodek sliko jo prikažemo, damo tudi link okoli nje da lahko odpremo celo sliko
+					{
+					?>
+						<a href="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>"><img src="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>" alt="<?php echo $dogodek->slika; ?>" height="50"></a>
+						<br/>
+					<?php 
+					}
+					?>	
+					</td>
+					
+					
+					
 					<?php 
 					
 					$trenutniCasTimestamp = time();
@@ -107,6 +123,19 @@
 					<td><?php echo date('d/m/Y H:i', $dogodek->trajanje); ?></td>
 					<td><?php echo date('d/m/Y H:i', $dogodek->termin);?></td>
 					<td><?php echo $dogodek->ocena; ?></td>
+					
+					<td>
+					<?php
+					if($dogodek->slika != "")//če ima dogodek sliko jo prikažemo, damo tudi link okoli nje da lahko odpremo celo sliko
+					{
+					?>
+						<a href="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>"><img src="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>" alt="<?php echo $dogodek->slika; ?>" height="50"></a>
+						<br/>
+					<?php 
+					}
+					?>	
+					</td>
+					
 					
 					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>">PREGLED DOGODKA</a></td>
 					

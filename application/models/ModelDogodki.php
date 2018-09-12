@@ -161,6 +161,18 @@ class ModelDogodki extends CI_Model
 		} else {
 			return false;
 		}
+	}function dodajSlikoDogodku($idDogodka, $slika)
+	{
+		$query = $this->db->query("UPDATE dogodki SET slika = '$slika' WHERE id = '$idDogodka'");
+		
+		//preverimo če smo uspešno dodali v bazo
+		if($this->db->affected_rows()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
+	
+}
 	
 }

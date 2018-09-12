@@ -16,10 +16,21 @@
 <body>
 	<div id="container">
 	
-		
 		<form class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
 			
 			<input type="hidden" name="idDogodka" id="idDogodka" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
+			
+			<?php 
+			
+			if($dogodek->slika != "")//če ima dogodek sliko jo prikažemo, damo tudi link okoli nje da lahko odpremo celo sliko
+			{
+			?>
+				<a href="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>"><img src="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>" alt="<?php echo $dogodek->slika; ?>" height="150"></a>
+				<br/>
+				<br/>
+			<?php 
+			}
+			?>			
 			
 			<label>Ime dogodka</label>
 			<input type="text" name="imeDogodka" id="imeDogodka" required value="<?php echo $dogodek->ime; ?>">
@@ -102,8 +113,23 @@
 			<button type="submit">UREDI</button>
 				
 		</form>
+				
 		<br/>
-		<button onclick="izbrisi(<?php echo $dogodek->id;?>)">IZBRIŠI</button> <!-- gumb damo izven form, drugace hoce submitati formo -->
+		<br/>
+		<form id="formNaloziSliko" action="<?php echo $this->config->base_url(); ?>CtrMain/nalozi_sliko" method="post" enctype="multipart/form-data">
+		
+		
+			<input type="hidden" name="idDogodkaSlika" id="idDogodkaSlika" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
+		
+		    Izberite sliko dogodka: <!-- https://www.w3schools.com/php/php_file_upload.asp -->
+		    <input type="file" name="fileToUpload" id="fileToUpload">
+		    <input type="submit" value="Naloži" name="submit">
+		</form>
+		<br/>
+		<br/>
+			
+		
+		<button onclick="izbrisi(<?php echo $dogodek->id;?>)">IZBRIŠI DOGODEK</button> <!-- gumb damo izven form, drugace hoce submitati formo -->
 		<br/>
 		<a href="<?php echo $this->config->base_url(); ?>CtrMain">NAZAJ</a>
 
@@ -115,6 +141,25 @@
 	<script>
 
 
+
+	/* $('#formNaloziSliko').on('submit', function (e) 
+	{
+        e.preventDefault(); //preprečimo da se forma submita in preusmeri na drugo stran ampak naredimo po svoje s postom v javaskriptu
+	    $.ajax({
+	        url : $(this).attr('action'), //vzamemo url iz forme (action="....")
+	        type: "POST",
+	        data: $(this).serialize(), //vzameme avtomatsko vse inpute iz forme da jih ne rabimo posebej pisat
+	        success: function (data) 
+	        {
+		        alert(data);
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+	        	document.getElementById("rezultat").innerHTML = "Napaka pri urejanju dogodka";
+		        alert(errorThrown);
+	        }
+	    });
+	}); */
+	
 	
 	function izbrisi(idDogodka)
 	{

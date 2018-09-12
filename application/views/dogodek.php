@@ -10,6 +10,17 @@
 	<div id="container">
 	
 		<h3>INFORMACIJE DOGODKA</h3>
+		<?php 
+		
+		if($dogodek->slika != "")//če ima dogodek sliko jo prikažemo, damo tudi link okoli nje da lahko odpremo celo sliko
+		{
+		?>
+			<a href="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>"><img src="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>" alt="<?php echo $dogodek->slika; ?>" height="150"></a>
+			<br/>
+		<?php 
+		}
+		?>	
+		
 		<p>Id dogodka: <?php echo $dogodek->id;?></p>
 	
 		<p>Ime dogodka: <?php echo $dogodek->ime;?></p>
