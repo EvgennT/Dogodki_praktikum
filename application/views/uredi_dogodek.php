@@ -199,10 +199,10 @@ resize: vertical;
 
 </style>
 <body>
-	<div id="container">
+	<div id="container" class="row">
 	
-		<form class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
-			
+		<form   class="col-10"  class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
+			<table style="background: #FBEEC1; ">
 			<input type="hidden" name="idDogodka" id="idDogodka" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
 			
 			<?php 
@@ -216,21 +216,34 @@ resize: vertical;
 			<?php 
 			}
 			?>			
-			
+			<tr >
+			<td style="background: #8EE4AF;">
 			<label>Ime dogodka</label>
+			</td>
+			<td >
 			<input type="text" name="imeDogodka" id="imeDogodka" required value="<?php echo $dogodek->ime; ?>">
+			</td>
+			</tr>
 			
-			<br/>
-			<br/>
 			
+			
+			<tr >
+			<td style="background: #8EE4AF;">
 			<label>Lokacija dogodka</label>
+			</td>
+			<td >
 			<input type="text" name="prostorDogodka" id="prostorDogodka" required value="<?php echo $dogodek->lokacija; ?>">
+			</td>
+			</tr>
 			
-			<br/>
 			
-			<br/>
+			
+			<tr >
+			<td style="background: #8EE4AF;">
 			<div class="form-group col-md-6">
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Začetek dogodka</label>
+				</td>
+			<td >
 				<div class="input-group date col-sm-4" id="datetimepicker1">
 					<input type='text' class="form-control" name="zacetekDogodka" id="zacetekDogodka" required value="<?php echo date('d-m-Y H:i', $dogodek->zacetek); ?>"/>
 					<span class="input-group-addon">
@@ -238,14 +251,17 @@ resize: vertical;
 					</span>
 				</div>
 			</div>
+			</td>
+			</tr>
 			
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-
+			
+			
+<tr >
+			<td style="background: #8EE4AF;">
 			<div class="form-group col-md-6">
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Trajanje dogodka</label>
+				</td>
+			<td >
 				<div class="input-group date col-sm-4" id="datetimepicker2">
 					<input type='text' class="form-control" name="trajanjeDogodka" id="trajanjeDogodka" required value="<?php echo date('d-m-Y H:i', $dogodek->trajanje); ?>"/>
 					<span class="input-group-addon">
@@ -253,14 +269,16 @@ resize: vertical;
 					</span>
 				</div>
 			</div>
+			</td>
+			</tr>
 			
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-
+			
+<tr >
+			<td style="background: #8EE4AF;">
 			<div class="form-group col-md-6">
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Termin prijave/odjave</label>
+				</td>
+			<td >
 				<div class="input-group date col-sm-4" id="datetimepicker3">
 					<input type='text' class="form-control" name="terminDogodka" id="terminDogodka" required value="<?php echo date('d-m-Y H:i', $dogodek->termin); ?>"/>
 					<span class="input-group-addon">
@@ -268,39 +286,62 @@ resize: vertical;
 					</span>
 				</div>
 			</div>
+			</td>
+			</tr>
+			
+			
 			
 			<br/>
-			<br/>
-			<br/>
-			
-			<br/>
-			
+			<tr >
+			<td style="background: #8EE4AF;">
 			<label>Min. število udeležencev</label>
+			</td>
+			<td >
 			<input type="number" name="minUdelezencev" id="minUdelezencev" required value="<?php echo $dogodek->min_udelezencev; ?>">
+			</td>
+			</tr>
 			
-			<br/>
-			<br/>
 			
+			<tr >
+			<td style="background: #8EE4AF;">
 			<label>Max. število udeležencev</label>
+			</td>
+			<td >
 			<input type="number" name="maxUdelezencev" id="maxUdelezencev" required value="<?php echo $dogodek->max_udelezencev; ?>">
+			</td>
+			</tr>
 			
-			<br/>
-			<br/>
 			
+			<tr >
+			<td style="background: #8EE4AF;">
 			<label>Opis dogodka</label>
+			</td>
+			<td >
 			<textarea name="opisDogodka" id="opisDogodka" >
 			<?php echo $dogodek->opis; ?>
 			</textarea>
+			</td>
+			</tr>
 			
-			<br/>
-			<br/>
 			
+			
+			
+			
+			<tr>
+			<td colspan="2" >
+			<center>
 			<button type="submit">UREDI</button>
-				
+			</center>
+			</td>			
+			</tr>
+			
+			
+			</table>	
 		</form>
 				
 		<br/>
 		<br/>
+		
 		<form id="formNaloziSliko" action="<?php echo $this->config->base_url(); ?>CtrMain/nalozi_sliko" method="post" enctype="multipart/form-data">
 		
 		
