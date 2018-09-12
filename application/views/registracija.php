@@ -219,7 +219,7 @@ h1 {
 			<td class="col-1">
 			<input placeholder="Vpišite še enkrat vaš e-mail" type="text"  class="form-control" name="emailPonovno" id="emailPonovno" required>
 			</td>
-			</tr>
+			</tr> 
 			
 			<tr class="col-1">
 			<td class="col-1" style="background: #8EE4AF;">
