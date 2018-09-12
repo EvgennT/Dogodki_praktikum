@@ -55,22 +55,22 @@ Za vzpostavitev podatkovne baze phpMyAdmin, sledite tem navodilom.
 
 
  ## Funkcionalnosti
- 1. registracija,
+1. Registracija,
 2. prijava, 
-3. odjava
-4. dva tipa uporabnikov: organizator, uporabnik
+3. odjava,
+4. dva tipa uporabnikov: organizator, uporabnik,
 5. dodajanje slik,
 6. urejanje dogodka, 
-7. ločevanje med prihajajočimi in poteklimi dogodki
+7. ločevanje med prihajajočimi in poteklimi dogodki,
 8. ocenjevanje dogodkov, 
-9. preverjanje prisotnosti
+9. preverjanje prisotnosti,
 10. sporočanje po e-pošti
 
 
  ## Podatkovna baza
  | Prvotna struktura | Končna struktura|
 | -------- |------|
-<img alt="Prvi ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/Slike/E-R%20diagram-prvi.png" width="117">| |
+| <img alt="Prvi ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/Slike/E-R%20diagram-prvi.png" width="117">|<img alt="Končni ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/Slike/er_model_koncni.jpg" width="117"> |
 
 
  ## Potek dela
