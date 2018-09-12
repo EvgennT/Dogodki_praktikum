@@ -190,7 +190,7 @@ span.input-group-addon i {
 			<input placeholder="Vpišite geslo" type="password" name="geslo" id="geslo" class="form-control" required>
 								</div>
 							</div>
-						</div>
+						</div> 
 
 						<div class="form-group" align="center" > 
 							<label for="confirm" class="cols-sm-2 control-label">Potrdite geslo</label>
