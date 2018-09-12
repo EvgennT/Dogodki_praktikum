@@ -517,8 +517,8 @@ class CtrMain extends CI_Controller {
 				'smtp_host' => 'ssl://smtp.googlemail.com',
 				'smtp_port' => '465',
 				'smtp_timeout' => '30',
-				'smtp_user' => 'lalalala@gmail.com', // change it to yours
-				'smtp_pass' => 'lalalalalalalala', // change it to yours
+				'smtp_user' => 'FDMAFAKDJOPKAFSOFAKJ@gmail.com', // change it to yours
+				'smtp_pass' => 'FDMAFAKDJOPKAFSOFAKJFDMAFAKDJOPKAFSOFAKJ', // change it to yours
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'newline' => '\r\n'
@@ -531,7 +531,7 @@ class CtrMain extends CI_Controller {
 			$this->email->set_mailtype("html");
 			$this->email->set_newline("\r\n");
 			
-			$this->email->from('lalalala@gmail.com'); // change it to yours
+			$this->email->from('FDMAFAKDJOPKAFSOFAKJ@gmail.com'); // change it to yours
 			$this->email->to($uporabnik->email);// change it to yours
 			$this->email->subject("Novi dogodek ".$imeDogodka);
 			
@@ -590,8 +590,8 @@ class CtrMain extends CI_Controller {
 				'smtp_host' => 'ssl://smtp.googlemail.com',
 				'smtp_port' => '465',
 				'smtp_timeout' => '30',
-				'smtp_user' => 'lalalala@gmail.com', // change it to yours
-				'smtp_pass' => 'lalalala', // change it to yours
+				'smtp_user' => 'FDMAFAKDJOPKAFSOFAKJ@gmail.com', // change it to yours
+				'smtp_pass' => 'FDMAFAKDJOPKAFSOFAKJFDMAFAKDJOPKAFSOFAKJ', // change it to yours
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'newline' => '\r\n'
@@ -602,7 +602,7 @@ class CtrMain extends CI_Controller {
 		$this->email->set_mailtype("html");
 		$this->email->set_newline("\r\n");
 		
-		$this->email->from('lalalala@gmail.com'); // change it to yours
+		$this->email->from('dogodki.praktikum@gmail.com'); // change it to yours
 		$this->email->to($uporabnik->email); // change it to yours
 		$this->email->subject("Prijava na dogodek ".$dogodek->ime);
 		
@@ -643,8 +643,8 @@ class CtrMain extends CI_Controller {
 				'smtp_host' => 'ssl://smtp.googlemail.com',
 				'smtp_port' => '465',
 				'smtp_timeout' => '30',
-				'smtp_user' => 'lalalala@gmail.com', // change it to yours
-				'smtp_pass' => 'lalalalalalalala', // change it to yours
+				'smtp_user' => 'FDMAFAKDJOPKAFSOFAKJ@gmail.com', // change it to yours
+				'smtp_pass' => 'FDMAFAKDJOPKAFSOFAKJFDMAFAKDJOPKAFSOFAKJ', // change it to yours
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'newline' => '\r\n'
@@ -655,7 +655,7 @@ class CtrMain extends CI_Controller {
 		$this->email->set_mailtype("html");
 		$this->email->set_newline("\r\n");
 		
-		$this->email->from('lalalala@gmail.com'); // change it to yours
+		$this->email->from('FDMAFAKDJOPKAFSOFAKJ@gmail.com'); // change it to yours
 		$this->email->to($uporabnik->email); // change it to yours
 		$this->email->subject("Odjava od dogodeka ".$dogodek->ime);
 		
@@ -729,8 +729,8 @@ class CtrMain extends CI_Controller {
 				'smtp_host' => 'ssl://smtp.googlemail.com',
 				'smtp_port' => '465',
 				'smtp_timeout' => '30',
-				'smtp_user' => 'lalalala@gmail.com', // change it to yours
-				'smtp_pass' => 'lalalala', // change it to yours
+				'smtp_user' => 'FDMAFAKDJOPKAFSOFAKJ@gmail.com', // change it to yours
+				'smtp_pass' => 'FDMAFAKDJOPKAFSOFAKJFDMAFAKDJOPKAFSOFAKJ', // change it to yours
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'newline' => '\r\n'
@@ -741,8 +741,8 @@ class CtrMain extends CI_Controller {
 		$this->email->set_mailtype("html");
 		$this->email->set_newline("\r\n");
 		
-		$this->email->from('lalalalac@gmail.com'); // change it to yours
-		$this->email->to('lalalala@gmail.com'); // change it to yours
+		$this->email->from('FDMAFAKDJOPKAFSOFAKJ@gmail.com'); // change it to yours
+		$this->email->to('toni.zunec14@gmail.com'); // change it to yours
 		$this->email->subject("SUBJECT");
 		
 		$message = "TEST MESSAGE";
