@@ -8,12 +8,15 @@
 <body>
 	<div id="container">
 	
+		<a style="float: right;" href="<?php echo $this->config->base_url(); ?>CtrMain/registracija">Registracija</a>
 		
 		<h3>PRIJAVA</h3>
+		
+		
 		<form id="formLogin" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/login_perform">
 			
 			<label>E-mail</label>
-			<input type="text" name="email" id="email" required>
+			<input type="email" name="email" id="email" required>
 			
 			<br/>
 			<br/>
@@ -27,5 +30,7 @@
 				
 		</form>
 	</div>
+	
+	
 </body>
 </html>

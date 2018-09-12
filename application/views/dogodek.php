@@ -28,7 +28,44 @@
 		
 		<p>Trenutno udeležencev: <?php echo count($prijavljeniNaDogodek); //count vrne število elementov v array ?></p>
 		
-		<p>Opis dogodka: <?php echo $dogodek->opis?></p>
+		<p>Opis dogodka: <?php echo $dogodek->opis; ?></p>
+		
+		
+		<?php 
+		$trenutniCasTimestamp = time();
+		
+		if($dogodek->termin < $trenutniCasTimestamp) //če je timestamp trenutnega časa večji je dogodek potekel in lahko prikažemo oceno
+		{
+		?>
+		
+		<p>Ocena dogodka: <?php echo $ocena; ?></p>
+		
+		<?php 
+		if($dogodek->prisotnost == "Y") // če je bil uporabnik prisoten lahko tudi dogodek oceni
+		{
+		?>
+		
+		Oceni dogodek
+		<select id="oceni">
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5" selected>5</option>
+		</select>
+  		<button onclick="oceniDogodek(<?php echo $dogodek->id; ?>)">Oceni</button>
+		
+		<?php 
+		}
+		?>
+		
+		
+		
+		<?php
+		}
+		?>
+		
+		
 		
 		
 		<?php 
@@ -103,6 +140,31 @@
 	
 	
 	<script>
+
+	function oceniDogodek(idDogodka) 
+	{
+		var selectOceni = document.getElementById("oceni");
+		var ocenaDogodka = selectOceni.options[selectOceni.selectedIndex].value; //dobimo izbrano oceno dogodka (https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript)
+
+		$.ajax({
+	        url : "http://localhost/Dogodki_praktikum/CtrMain/oceni_dogodek",
+	        type: "POST",
+	        data: {'idDogodka': idDogodka, 'ocenaDogodka': ocenaDogodka},
+	        success: function (data) 
+	        {
+	        	if(data == 1) {
+		        	alert("Vaša ocena je zabeležena");
+					location.reload();
+			    } else {
+					alert("Napaka");
+				}
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+		        alert(errorThrown);
+	        }
+	    });
+	}
+	
 	function PotrdiPrisotnost(idUporabnika, idDogodka)
 	{
 		//alert(idDogodka);

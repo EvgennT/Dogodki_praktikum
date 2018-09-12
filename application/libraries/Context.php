@@ -32,9 +32,9 @@ class Context {
 		}
 	}
 	
-	function performLogout()
+	function odjavaUporabnika()
 	{
-		//pobriÅ¡emo sejo ko se odjavimo
+		//pobrišemo sejo ko se odjavimo
 		//Clears session data.
 		$CI =& get_instance();
 		$CI->load->library('session');

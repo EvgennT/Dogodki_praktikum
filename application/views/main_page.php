@@ -92,6 +92,7 @@
 					<th>Zacetek</th>
 					<th>Trajanje</th>
 					<th>Termin prijave/odjave</th>
+					<th>Povprečna ocena</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -105,6 +106,7 @@
 					<td><?php echo date('d/m/Y H:i', $dogodek->zacetek);  //date nam pretvori timestamp v datum podanega formata ?></td>
 					<td><?php echo date('d/m/Y H:i', $dogodek->trajanje); ?></td>
 					<td><?php echo date('d/m/Y H:i', $dogodek->termin);?></td>
+					<td><?php echo $dogodek->ocena; ?></td>
 					
 					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>">PREGLED DOGODKA</a></td>
 					

@@ -35,7 +35,43 @@ class CtrMain extends CI_Controller {
 			//shranimo v data array eventov
 			//$data['dogodki'] = $ModelDogodki->getVseDogodke($idUporabnika);
 			$data['dogodkiPrihodnji'] = $ModelDogodki->getPrihodnjeDogodke($idUporabnika);
-			$data['dogodkiPretekli'] = $ModelDogodki->getPretekleDogodke($idUporabnika);
+			
+			
+			
+			$dogodkiPretekli = $ModelDogodki->getPretekleDogodke($idUporabnika);
+			
+			foreach ($dogodkiPretekli as $dogodek) //gremo skozi dogodke in vsakemu dogodku pridobimo oceno
+			{
+				$idDogodka = $dogodek->id;
+				
+				$dogodekOcene = $ModelDogodki->getDogodekOcene($idDogodka);
+				
+				$ocena = 0;
+				$i = 0;
+				foreach ($dogodekOcene as $dogodekOcena)
+				{
+					$i++;
+					
+					$ocena = $ocena + $dogodekOcena->ocena;
+				}
+				
+				if($i != 0)
+				{
+					$ocena = $ocena / $i; //zračunamo povprečno oceno
+				}
+				
+				if($ocena == 0)
+				{
+					$ocena = "/";
+				}
+				
+				$dogodek->ocena = $ocena;
+				
+			}
+			
+			$data['dogodkiPretekli'] = $dogodkiPretekli;
+			
+			
 			
 			
 			//shranimo v data tip uporabnika (0 = navaden uporabnik, 1 = admin)
@@ -84,6 +120,33 @@ class CtrMain extends CI_Controller {
 			$data['tipUporabnika'] = $Context->getTipUporabnika();
 			//var_dump($data['dogodek']);
 			
+			
+			$dogodekOcene = $ModelDogodki->getDogodekOcene($idDogodka);
+			
+			
+			//var_dump($dogodekOcene);
+			
+			$ocena = 0;
+			
+			$i = 0;
+			foreach ($dogodekOcene as $dogodekOcena) 
+			{
+				$i++;
+				
+				$ocena = $ocena + $dogodekOcena->ocena;
+			}
+			
+			if($i != 0)
+			{
+				$ocena = $ocena / $i; //zračunamo povprečno oceno
+			}
+			
+			if($ocena == 0)
+			{
+				$ocena = "/";
+			}
+			
+			$data['ocena'] = $ocena;
 			
 			$this->load->view('dogodek', $data);
 		} else {
@@ -157,16 +220,18 @@ class CtrMain extends CI_Controller {
 				//strtotime nam pretvori datum iz stringa v število (unix timestamp)
 				
 				$zacetekDogodka = $this->input->post('zacetekDogodka');
-				$zacetekDogodka = strtotime($zacetekDogodka);
+				$zacetekDogodkaTimestamp = strtotime($zacetekDogodka);
 				
 				$trajanjeDogodka = $this->input->post('trajanjeDogodka');
-				$trajanjeDogodka = strtotime($trajanjeDogodka);
+				$trajanjeDogodkaTimestamp = strtotime($trajanjeDogodka);
 				
 				$terminDogodka = $this->input->post('terminDogodka');
-				$terminDogodka = strtotime($terminDogodka);
+				$terminDogodkaTimestamp = strtotime($terminDogodka);
 				
 				
-				$result = $ModelDogodki->dodajDogodek($imeDogodka, $prostorDogodka, $zacetekDogodka, $trajanjeDogodka, $terminDogodka, $minUdelezencev, $maxUdelezencev, $opisDogodka);
+				$result = $ModelDogodki->dodajDogodek($imeDogodka, $prostorDogodka, $zacetekDogodkaTimestamp, $trajanjeDogodkaTimestamp, $terminDogodkaTimestamp, $minUdelezencev, $maxUdelezencev, $opisDogodka);
+				
+				$this->mail_novi_dogodek($imeDogodka, $prostorDogodka, $zacetekDogodka, $trajanjeDogodka, $terminDogodka, $minUdelezencev, $maxUdelezencev, $opisDogodka);
 				
 				echo $result;
 				/* $this->load->helper('url'); //za preusmerjanje na drugo stran
@@ -202,6 +267,7 @@ class CtrMain extends CI_Controller {
 			$trenutniCasTimestamp = time();
 			if($dogodek->termin > $trenutniCasTimestamp) //če je timestamp trenutnega časa manjši od timestampa termina prijave/odjave pomeni da se še vedno lahko prijavimo/odjavimo
 			{
+				$this->mail_prijava_na_dogodek($idUporabnika, $dogodek);
 				$result = $ModelDogodki->prijavaNaDogodek($idUporabnika, $idDogodka);
 			}
 			
@@ -232,6 +298,7 @@ class CtrMain extends CI_Controller {
 			$trenutniCasTimestamp = time();
 			if($dogodek->termin > $trenutniCasTimestamp) //če je timestamp trenutnega časa manjši od timestampa termina prijave/odjave pomeni da se še vedno lahko prijavimo/odjavimo
 			{
+				$this->mail_odjava_iz_dogodek($idUporabnika, $dogodek);
 				$result = $ModelDogodki->odjavaIzDogodka($idUporabnika, $idDogodka);
 			}
 			
@@ -432,5 +499,274 @@ class CtrMain extends CI_Controller {
 		}
 	}
 	
+	public function mail_novi_dogodek($imeDogodka, $prostorDogodka, $zacetekDogodka, $trajanjeDogodka, $terminDogodka, $minUdelezencev, $maxUdelezencev, $opisDogodka) {
+		
+		$this->load->database();
+		$this->load->model('ModelUporabniki');
+		$ModelUporabniki = new ModelUporabniki();
+		
+		$vsiUporabniki = $ModelUporabniki->getUporabniki(); //dobimo vse uporabnike za poslat mail
+		
+		
+		/*
+		 https://stackoverflow.com/questions/18586801/send-email-by-using-codeigniter-library-via-localhost
+		 https://www.codexworld.com/codeigniter-send-email-gmail-smtp-server/
+		 */
+		$config = Array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => '465',
+				'smtp_timeout' => '30',
+				'smtp_user' => 'lalalala@gmail.com', // change it to yours
+				'smtp_pass' => 'lalalalalalalala', // change it to yours
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'newline' => '\r\n'
+				);
+		
+		$this->load->library('email', $config);
+		foreach ($vsiUporabniki as $uporabnik)
+		{
+			$this->email->initialize($config);
+			$this->email->set_mailtype("html");
+			$this->email->set_newline("\r\n");
+			
+			$this->email->from('lalalala@gmail.com'); // change it to yours
+			$this->email->to($uporabnik->email);// change it to yours
+			$this->email->subject("Novi dogodek ".$imeDogodka);
+			
+			$message = "Pozdravljeni $uporabnik->ime, obveščamo vas da je objavljen novi dogodek <b>$imeDogodka</b>.
+			<br/>
+			<br/>
+			Prostor dogodka: <b>$prostorDogodka</b>
+			<br/>
+			Zacetek dogodka: <b>$zacetekDogodka</b>
+			<br/>
+			Trajanje dogodka: <b>$trajanjeDogodka</b>
+			<br/>
+			Termin prijave dogodka: <b>$terminDogodka</b>
+			<br/>
+			Min. št. udeležencev dogodka: <b>$minUdelezencev</b>
+			<br/>
+			Max. št. udeležencev dogodka: <b>$maxUdelezencev</b>
+			<br/>
+			Opis dogodka: <b>$opisDogodka</b>
+			<br/>
+			";
+			
+			$this->email->message($message);
+			
+			$this->email->send();
+		}
+		
+		
+		
+		/* 
+		if($this->email->send())
+		{
+			echo 'Email sent.';
+		}
+		else
+		{
+			show_error($this->email->print_debugger());
+		} 
+		*/
+	}
+	
+	public function mail_prijava_na_dogodek($idUporabnika, $dogodek) {
+		
+		$this->load->database();
+		$this->load->model('ModelUporabniki');
+		$ModelUporabniki = new ModelUporabniki();
+		
+		$uporabnik = $ModelUporabniki->getUporabnika2($idUporabnika);
+		
+		/*
+		 https://stackoverflow.com/questions/18586801/send-email-by-using-codeigniter-library-via-localhost
+		 https://www.codexworld.com/codeigniter-send-email-gmail-smtp-server/
+		 */
+		$config = Array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => '465',
+				'smtp_timeout' => '30',
+				'smtp_user' => 'lalalala@gmail.com', // change it to yours
+				'smtp_pass' => 'lalalala', // change it to yours
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'newline' => '\r\n'
+				);
+		
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+		$this->email->set_mailtype("html");
+		$this->email->set_newline("\r\n");
+		
+		$this->email->from('lalalala@gmail.com'); // change it to yours
+		$this->email->to($uporabnik->email); // change it to yours
+		$this->email->subject("Prijava na dogodek ".$dogodek->ime);
+		
+		$message = "Pozdravljeni $uporabnik->ime, obveščamo vas da ste se prijavili na dogodek <b>$dogodek->ime</b>.";
+		
+		$this->email->message($message);
+		
+		$this->email->send();
+		
+		
+		
+		/*
+		 if($this->email->send())
+		 {
+		 echo 'Email sent.';
+		 }
+		 else
+		 {
+		 show_error($this->email->print_debugger());
+		 }
+		 */
+	}
+	
+	public function mail_odjava_iz_dogodek($idUporabnika, $dogodek) {
+		
+		$this->load->database();
+		$this->load->model('ModelUporabniki');
+		$ModelUporabniki = new ModelUporabniki();
+		
+		$uporabnik = $ModelUporabniki->getUporabnika2($idUporabnika);
+		
+		/*
+		 https://stackoverflow.com/questions/18586801/send-email-by-using-codeigniter-library-via-localhost
+		 https://www.codexworld.com/codeigniter-send-email-gmail-smtp-server/
+		 */
+		$config = Array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => '465',
+				'smtp_timeout' => '30',
+				'smtp_user' => 'lalalala@gmail.com', // change it to yours
+				'smtp_pass' => 'lalalalalalalala', // change it to yours
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'newline' => '\r\n'
+				);
+		
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+		$this->email->set_mailtype("html");
+		$this->email->set_newline("\r\n");
+		
+		$this->email->from('lalalala@gmail.com'); // change it to yours
+		$this->email->to($uporabnik->email); // change it to yours
+		$this->email->subject("Odjava od dogodeka ".$dogodek->ime);
+		
+		$message = "Pozdravljeni $uporabnik->ime, obveščamo vas da ste se odjavili od dogodka <b>$dogodek->ime</b>.";
+		
+		$this->email->message($message);
+		
+		$this->email->send();
+		
+		
+		
+		/*
+		 if($this->email->send())
+		 {
+		 echo 'Email sent.';
+		 }
+		 else
+		 {
+		 show_error($this->email->print_debugger());
+		 }
+		 */
+	}
+	
+	public function registracija()
+	{
+		$this->load->view('registracija');
+	}
+	
+	
+	public function registracija_perform()
+	{
+		$this->load->database();
+		$this->load->model('ModelUporabniki');
+		$ModelUporabniki = new ModelUporabniki();
+		
+		$ime  = $this->input->post('ime');
+		$priimek = $this->input->post('priimek');
+		$email = $this->input->post('email');
+		$emailPonovno = $this->input->post('emailPonovno');
+		$geslo = $this->input->post('geslo');
+		$gesloPonovno = $this->input->post('gesloPonovno');
+		
+		
+		$uporabnikObstaja = $ModelUporabniki->uporabnikObstaja($email); //preverimo če email v bazi že obstaja da se ne more registrirati večkrat
+		
+		if($email != $emailPonovno)
+		{
+			$result ="email";
+		}
+		else if($geslo != $gesloPonovno)
+		{
+			$result = "geslo";
+		}
+		else if($uporabnikObstaja) 
+		{
+			$result = "obstaja";
+		}
+		else 
+		{
+			$result = $ModelUporabniki->registracija($ime, $priimek, $email, $geslo);
+		}
+		
+		
+		echo $result;
+		
+	}
+	
+	public function oceni_dogodek()
+	{
+		$this->load->library('Context');
+		$Context = new Context();
+		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
+		{
+			if($Context->getTipUporabnika() == 1) //preveri če je uporabnik organizator, drugače preusmeri na glavno stran
+			{
+				$this->load->database();
+				$this->load->model('ModelDogodki');
+				$ModelDogodki = new ModelDogodki();
+				
+				$ocenaDogodka = $this->input->post('ocenaDogodka');
+				$idDogodka = $this->input->post('idDogodka');
+				$idUporabnika = $Context->getIdUporabnika();
+				
+				$result = $ModelDogodki->oceniDogodek($idDogodka, $ocenaDogodka, $idUporabnika);
+				
+				echo $result;
+				
+			} else {
+				$this->load->helper('url');
+				redirect($this->config->base_url()."CtrMain");
+			}
+		} else {
+			$this->load->helper('url');
+			redirect($this->config->base_url()."CtrMain/login"); //odpre login
+		}
+	}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
