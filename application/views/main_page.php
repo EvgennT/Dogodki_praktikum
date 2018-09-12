@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="container">
-	
+		
 	
 		<a style="float:right;" href="<?php echo $this->config->base_url(); ?>CtrMain/odjava_uporabnika">ODJAVA</a>
 		<?php
@@ -62,13 +62,13 @@
 					
 					<?php 
 					
-					$trenutniCasTimestamp = time();
+					$trenutniCasTimestamp = time() + 7200;
 					
 					if($dogodek->termin > $trenutniCasTimestamp) //če je timestamp trenutnega časa manjši od timestampa termina prijave/odjave pomeni da se še vedno lahko prijavimo/odjavimo
 					{
 						if(isset($dogodek->id_uporabnika))  //če ima id_uporabnika pomeni da je ta uporabnik že prijavlen na ta dogodek, zato mu ponudimo odjavo
 						{
-						?>
+					?>
 						<td><button onclick="odjavaIzDogodka(<?php echo $dogodek->id;?>)">ODJAVA</button></td>
 						<?php 
 						}

@@ -115,6 +115,7 @@ class CtrMain extends CI_Controller {
 			$idUporabnika = $Context->getIdUporabnika();
 			$data['dogodek'] = $ModelDogodki->getDogodek($idDogodka, $idUporabnika); //informacije o dogodku
 			
+			
 			$data['prijavljeniNaDogodek'] = $ModelDogodki->getPrijavljeniNaDogodek($idDogodka); //seznam vseh prijavlenih za ta dogodek
 			
 			$data['tipUporabnika'] = $Context->getTipUporabnika();
@@ -264,7 +265,7 @@ class CtrMain extends CI_Controller {
 			
 			
 			$dogodek = $ModelDogodki->getDogodek($idDogodka, $idUporabnika);
-			$trenutniCasTimestamp = time();
+			$trenutniCasTimestamp = time() + 7200;
 			if($dogodek->termin > $trenutniCasTimestamp) //če je timestamp trenutnega časa manjši od timestampa termina prijave/odjave pomeni da se še vedno lahko prijavimo/odjavimo
 			{
 				$this->mail_prijava_na_dogodek($idUporabnika, $dogodek);
@@ -295,7 +296,7 @@ class CtrMain extends CI_Controller {
 			
 			
 			$dogodek = $ModelDogodki->getDogodek($idDogodka, $idUporabnika);
-			$trenutniCasTimestamp = time();
+			$trenutniCasTimestamp = time() + 7200;
 			if($dogodek->termin > $trenutniCasTimestamp) //če je timestamp trenutnega časa manjši od timestampa termina prijave/odjave pomeni da se še vedno lahko prijavimo/odjavimo
 			{
 				$this->mail_odjava_iz_dogodek($idUporabnika, $dogodek);
@@ -506,7 +507,6 @@ class CtrMain extends CI_Controller {
 		$ModelUporabniki = new ModelUporabniki();
 		
 		$vsiUporabniki = $ModelUporabniki->getUporabniki(); //dobimo vse uporabnike za poslat mail
-		
 		
 		/*
 		 https://stackoverflow.com/questions/18586801/send-email-by-using-codeigniter-library-via-localhost
@@ -723,30 +723,58 @@ class CtrMain extends CI_Controller {
 		
 	}
 	
+	public function mail_test() {
+		$config = Array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => '465',
+				'smtp_timeout' => '30',
+				'smtp_user' => 'lalalala@gmail.com', // change it to yours
+				'smtp_pass' => 'lalalala', // change it to yours
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'newline' => '\r\n'
+				);
+		
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+		$this->email->set_mailtype("html");
+		$this->email->set_newline("\r\n");
+		
+		$this->email->from('lalalalac@gmail.com'); // change it to yours
+		$this->email->to('lalalala@gmail.com'); // change it to yours
+		$this->email->subject("SUBJECT");
+		
+		$message = "TEST MESSAGE";
+		$this->email->message($message);
+		
+		 if($this->email->send())
+		 {
+		 echo 'Email sent.';
+		 }
+		 else
+		 {
+		 show_error($this->email->print_debugger());
+		 }
+	}
+	
 	public function oceni_dogodek()
 	{
 		$this->load->library('Context');
 		$Context = new Context();
 		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
 		{
-			if($Context->getTipUporabnika() == 1) //preveri če je uporabnik organizator, drugače preusmeri na glavno stran
-			{
-				$this->load->database();
-				$this->load->model('ModelDogodki');
-				$ModelDogodki = new ModelDogodki();
-				
-				$ocenaDogodka = $this->input->post('ocenaDogodka');
-				$idDogodka = $this->input->post('idDogodka');
-				$idUporabnika = $Context->getIdUporabnika();
-				
-				$result = $ModelDogodki->oceniDogodek($idDogodka, $ocenaDogodka, $idUporabnika);
-				
-				echo $result;
-				
-			} else {
-				$this->load->helper('url');
-				redirect($this->config->base_url()."CtrMain");
-			}
+			$this->load->database();
+			$this->load->model('ModelDogodki');
+			$ModelDogodki = new ModelDogodki();
+			
+			$ocenaDogodka = $this->input->post('ocenaDogodka');
+			$idDogodka = $this->input->post('idDogodka');
+			$idUporabnika = $Context->getIdUporabnika();
+			
+			$result = $ModelDogodki->oceniDogodek($idDogodka, $ocenaDogodka, $idUporabnika);
+			
+			echo $result;
 		} else {
 			$this->load->helper('url');
 			redirect($this->config->base_url()."CtrMain/login"); //odpre login
@@ -754,37 +782,26 @@ class CtrMain extends CI_Controller {
 	}
 	
 	
-} public function nalozi_sliko()
+	public function nalozi_sliko()
 	{
 		$this->load->library('Context');
-
 		$Context = new Context();
-
 		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
-
 		{
 			if($Context->getTipUporabnika() == 1) //preveri če je uporabnik organizator, drugače preusmeri na glavno stran
-
 			{
 				//vzeto iz https://www.w3schools.com/php/php_file_upload.asp
-
+				
 				$retultat = "";
+				
 				$target_dir = "slike/";
-
 				$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-
 				$uploadOk = 1;
-
 				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
 				// Check if image file is a actual image or fake image
-
 				if(isset($_POST["submit"])) {
-
 					$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-
 					if($check !== false) {
-
 						//echo "File is an image - " . $check["mime"] . ".";
 						$uploadOk = 1;
 					} else {
@@ -792,98 +809,84 @@ class CtrMain extends CI_Controller {
 						$uploadOk = 0;
 					}
 				}
-
+				
 				// Check if file already exists
-
 				if (file_exists($target_file)) {
-
 					$retultat = $retultat."Izbrana slika že obstaja.";
-
 					$uploadOk = 0;
-
 				}
-
 				// Check file size
-
 				if ($_FILES["fileToUpload"]["size"] > 500000) {
-
 					$retultat = $retultat."Slika je prevelika.";
-
 					$uploadOk = 0;
-
 				}
-
 				// Allow certain file formats
-
 				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-
 					$retultat = $retultat."Dovoljene so slike s končnico JPG, JPEG, PNG in GIF.";
-
 					$uploadOk = 0;
-
 				}
-
 				// Check if $uploadOk is set to 0 by an error
-
 				if ($uploadOk == 0) {
-
 					$retultat = $retultat."Oprostite, slika ni naložena.";
-
 					// if everything is ok, try to upload file
-
 				} else {
-
 					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-
 						$retultat = $retultat."Slika ". basename( $_FILES["fileToUpload"]["name"]). " je uspešno naložena.";
-
+						
+						
+						
+						
+						
 						$this->load->database();
-
 						$this->load->model('ModelDogodki');
-
 						$ModelDogodki = new ModelDogodki();
-
+						
 						$idDogodka = $this->input->post('idDogodkaSlika');
-
 						$imeSlike = basename( $_FILES["fileToUpload"]["name"]);
-
+						
 						$result = $ModelDogodki->dodajSlikoDogodku($idDogodka, $imeSlike);
-
+						
 						$data['slika'] = $imeSlike;
-
+						
+						
+						
+						
+						
+						
 					} else {
-
 						$retultat = $retultat."Oprostite, pri nalaganju slike je prišlo do napake.";
 					}
 				}
+				
+				
 				$data['rezultat'] = $retultat;
-
 				
-
 				
-
 				$this->load->view('nalozi_sliko', $data);
-
 				
-
 			} else {
-
 				$this->load->helper('url');
-
 				redirect($this->config->base_url()."CtrMain");
-
 			}
-
 		} else {
-
 			$this->load->helper('url');
-
 			redirect($this->config->base_url()."CtrMain/login"); //odpre login
-
 		}
-
 	}
-
 	
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

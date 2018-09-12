@@ -2011,60 +2011,25 @@ class CI_Email {
 	 *
 	 * @return	string
 	 */
-	protected function _smtp_connect()
-	{
-		if (is_resource($this->_smtp_connect))
-		{
-			return TRUE;
-		}
-
-		$ssl = ($this->smtp_crypto === 'ssl') ? 'ssl://' : '';
-
-		$this->_smtp_connect = fsockopen(
-			$ssl.$this->smtp_host,
-			$this->smtp_port,
-			$errno,
-			$errstr,
-			$this->smtp_timeout
-		);
-
-		if ( ! is_resource($this->_smtp_connect))
-		{
-			$this->_set_error_message('lang:email_smtp_error', $errno.' '.$errstr);
-			return FALSE;
-		}
-
-		stream_set_timeout($this->_smtp_connect, $this->smtp_timeout);
-		$this->_set_error_message($this->_get_smtp_data());
-
-		if ($this->smtp_crypto === 'tls')
-		{
-			$this->_send_command('hello');
-			$this->_send_command('starttls');
-
-			/**
-			 * STREAM_CRYPTO_METHOD_TLS_CLIENT is quite the mess ...
-			 *
-			 * - On PHP <5.6 it doesn't even mean TLS, but SSL 2.0, and there's no option to use actual TLS
-			 * - On PHP 5.6.0-5.6.6, >=7.2 it means negotiation with any of TLS 1.0, 1.1, 1.2
-			 * - On PHP 5.6.7-7.1.* it means only TLS 1.0
-			 *
-			 * We want the negotiation, so we'll force it below ...
-			 */
-			$method = is_php('5.6')
-				? STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT
-				: STREAM_CRYPTO_METHOD_TLS_CLIENT;
-			$crypto = stream_socket_enable_crypto($this->_smtp_connect, TRUE, $method);
-
-			if ($crypto !== TRUE)
-			{
-				$this->_set_error_message('lang:email_smtp_error', $this->_get_smtp_data());
-				return FALSE;
-			}
-		}
-
-		return $this->_send_command('hello');
-	}
+	protected function _smtp_connect() { if (is_resource($this->_smtp_connect)) { return TRUE; }
+	
+	$ssl = ($this->smtp_crypto === 'ssl') ? 'ssl://' : '';
+	
+	$streamContext = stream_context_create([            'ssl' => [                'verify_peer'      => false,                'verify_peer_name' => false            ]        ]);
+	
+	$this->_smtp_connect = stream_socket_client($ssl.$this->smtp_host.':'.$this->smtp_port, $errno, $errstr, $this->smtp_timeout, STREAM_CLIENT_CONNECT, $streamContext);
+	
+	if ( ! is_resource($this->_smtp_connect)) { $this->_set_error_message('lang:email_smtp_error', $errno.' '.$errstr); return FALSE; }
+	
+	stream_set_timeout($this->_smtp_connect, $this->smtp_timeout); $this->_set_error_message($this->_get_smtp_data());
+	
+	if ($this->smtp_crypto === 'tls') { $this->_send_command('hello'); $this->_send_command('starttls');
+	
+	$crypto = stream_socket_enable_crypto($this->_smtp_connect, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+	
+	if ($crypto !== TRUE) { $this->_set_error_message('lang:email_smtp_error', $this->_get_smtp_data()); return FALSE; } }
+	
+	return $this->_send_command('hello'); }
 
 	// --------------------------------------------------------------------
 

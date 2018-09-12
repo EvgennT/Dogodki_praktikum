@@ -28,7 +28,7 @@ class ModelDogodki extends CI_Model
 	
 	function getPrihodnjeDogodke($idUporabnika)
 	{
-		$trenutniCasTimestamp = time(); //dobimo unix timestamp in ga primerjamo če je manjši timestamp trajanja dogodka - pomeni da še dogodek ni bil končan
+		$trenutniCasTimestamp = time() + 7200; //dobimo unix timestamp in ga primerjamo če je manjši timestamp trajanja dogodka - pomeni da še dogodek ni bil končan
 		// AND dogodki.trajanje < 1 GROUP BY dogodki.id
 		$query = $this->db->query("SELECT dogodki.*, dogodki_prijava.id_uporabnika FROM dogodki LEFT JOIN dogodki_prijava ON dogodki_prijava.id_dogodka = dogodki.id
 				AND dogodki_prijava.id_uporabnika = '$idUporabnika' WHERE dogodki.trajanje > $trenutniCasTimestamp GROUP BY dogodki.id");
@@ -39,7 +39,7 @@ class ModelDogodki extends CI_Model
 	
 	function getPretekleDogodke($idUporabnika)
 	{
-		$trenutniCasTimestamp = time(); //dobimo unix timestamp in ga primerjamo če je večji timestamp trajanja dogodka
+		$trenutniCasTimestamp = time() + 7200; //dobimo unix timestamp in ga primerjamo če je večji timestamp trajanja dogodka
 		$query = $this->db->query("SELECT dogodki.*, dogodki_prijava.id_uporabnika FROM dogodki LEFT JOIN dogodki_prijava ON dogodki_prijava.id_dogodka = dogodki.id
 				AND dogodki_prijava.id_uporabnika = '$idUporabnika' WHERE dogodki.trajanje < $trenutniCasTimestamp GROUP BY dogodki.id");
 		
@@ -161,7 +161,10 @@ class ModelDogodki extends CI_Model
 		} else {
 			return false;
 		}
-	}function dodajSlikoDogodku($idDogodka, $slika)
+	}
+	
+	
+	function dodajSlikoDogodku($idDogodka, $slika)
 	{
 		$query = $this->db->query("UPDATE dogodki SET slika = '$slika' WHERE id = '$idDogodka'");
 		
@@ -172,7 +175,5 @@ class ModelDogodki extends CI_Model
 			return false;
 		}
 	}
-	
-}
 	
 }

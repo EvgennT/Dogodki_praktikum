@@ -10,6 +10,8 @@
 	<div id="container">
 	
 		<h3>INFORMACIJE DOGODKA</h3>
+		
+		
 		<?php 
 		
 		if($dogodek->slika != "")//če ima dogodek sliko jo prikažemo, damo tudi link okoli nje da lahko odpremo celo sliko
@@ -43,7 +45,7 @@
 		
 		
 		<?php 
-		$trenutniCasTimestamp = time();
+		$trenutniCasTimestamp = time() + 7200;
 		
 		if($dogodek->termin < $trenutniCasTimestamp) //če je timestamp trenutnega časa večji je dogodek potekel in lahko prikažemo oceno
 		{
@@ -81,7 +83,7 @@
 		
 		<?php 
 		
-		$trenutniCasTimestamp = time();
+		$trenutniCasTimestamp = time() + 7200;
 		
 		if($dogodek->termin > $trenutniCasTimestamp) //če je timestamp trenutnega časa manjši od timestampa termina prijave/odjave pomeni da se še vedno lahko prijavimo/odjavimo
 		{
@@ -114,7 +116,7 @@
 			
 				<?php 
 				
-				$trenutniCasTimestamp = time();
+				$trenutniCasTimestamp = time() + 7200;
 				
 				if($dogodek->trajanje  < $trenutniCasTimestamp) //gumbe za prisotnost pokažemo le če je dogodek že pretekel
 				{
@@ -250,7 +252,7 @@
 	        {
 	        	if(data == 1) {
 					alert("Uspešno odjavljeni iz dogodka");
-					location.reload();
+					location.reload(); //osveži stran
 			    } else {
 					alert("Napaka");
 					location.reload();
