@@ -20,194 +20,213 @@
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
 <style>
-#playground-container {
-    height: 500px;
-    overflow: hidden !important;
-    -webkit-overflow-scrolling: touch;
-}
-body, html{
-     height: 100%;
- 	background-repeat: no-repeat;
- 	background:url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
- 	font-family: 'Oxygen', sans-serif;
-	    background-size: cover;
+
+body{background-image: url("https://cdn.zuerich.com/sites/default/files/styles/sharing/public/web_zuerich_home_topevents_1600x900.jpg?itok=yjC-dXXH");
+	 background-repeat:no-repeat;
+	 background-size:cover;
+	 width:100%;
+	 height:100vh;
+	 overflow:auto;
+	 
 }
 
-.main{
- 	margin:50px 15px;
+/*-----for border----*/
+.container{ 
+	font-family:Roboto,sans-serif;
+	  background-image:url(https://image.freepik.com/free-vector/dark-blue-blurred-background_1034-589.jpg) ;
+    
+     border-style: 1px solid grey;
+     margin: 0 auto;
+     text-align: center;
+     opacity: 0.8;
+     margin-top: 67px;
+   box-shadow: 2px 5px 5px 0px #eee;
+     max-width: 500px;
+     padding-top: 10px;
+     height: 363px;
+     margin-top: 166px;
+}
+/*--- for label of first and last name---*/
+.lastname{
+	 margin-left: 1px;
+     font-family: sans-serif;
+     font-size: 14px;
+     color: white;
+     margin-top: 10px;
+}
+.firstname{
+	 margin-left: 1px;
+     font-family: sans-serif;
+     font-size: 14px;
+     color: white;
+     margin-top: 5px;
+}
+#lname{
+	 margin-top:5px;
+}
+	  
+
+/*---for heading-----*/
+.heading{
+	 text-decoration:bold;
+	 text-align : center;
+	 font-size:30px;
+	 color:#F96;
+	 padding-top:10px;
+}
+/*-------for email----------*/
+  /*------label----*/
+#email{
+	  margin-top: 5px;
+}
+/*-----------for Password--------*/
+     /*-------label-----*/
+.mail{
+	 margin-left: 44px;
+     font-family: sans-serif;
+     color: white;
+     font-size: 14px;
+     margin-top: 13px;
+}
+.pass{
+	 color: white;
+     margin-top: 9px;
+     font-size: 14px;
+     font-family: sans-serif;
+     margin-left: 6px;
+     margin-top: 9px;
+}
+#password{
+ margin-top: 6px;
+}
+/*------------for phone Number--------*/
+      /*----------label--------*/
+.pno{
+	 font-size: 18px;
+     margin-left: -13px;
+     margin-top: 10px;
+     color: #ff9;
+	
+}	
+
+/*--------------for Gender---------------*/
+     /*--------------label---------*/
+.gender {
+	 color: white;
+     font-family: sans-serif;
+     font-size: 14px;
+     margin-left: 28px;
+     margin-top: 8px;
 }
 
-h1.title { 
-	font-size: 50px;
-	font-family: 'Passion One', cursive; 
-	font-weight: 400; 
+     /*---------- for Input type--------*/
+.col-xs-4.male{
+	 color: white;
+     font-size: 13px;
+     margin-top: 9px;
+     padding-bottom: 16px;
 }
-
-hr{
-	width: 10%;
-	color: #fff;
-}
-
-.form-group{
-	margin-bottom: 15px;
-}
-
-label{
-	margin-bottom: 15px;
-}
-
-input,
-input::-webkit-input-placeholder {
-    font-size: 11px;
-    padding-top: 3px;
-}
-
-.main-login{
- 	background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-
-}
-.form-control {
-    height: auto!important;
-padding: 8px 12px !important;
-}
-.input-group {
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
-}
-#button {
-    border: 1px solid #ccc;
-    margin-top: 28px;
-    padding: 6px 12px;
-    color: #666;
-    text-shadow: 0 1px #fff;
-    cursor: pointer;
-    -moz-border-radius: 3px 3px;
-    -webkit-border-radius: 3px 3px;
-    border-radius: 3px 3px;
-    -moz-box-shadow: 0 1px #fff inset, 0 1px #ddd;
-    -webkit-box-shadow: 0 1px #fff inset, 0 1px #ddd;
-    box-shadow: 0 1px #fff inset, 0 1px #ddd;
-    background: #f5f5f5;
-    background: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #eeeeee));
-    background: -webkit-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-    background: -o-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-    background: -ms-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-    background: linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);
-}
-.main-center{
- 	margin-top: 30px;
- 	margin: 0 auto;
- 	max-width: 400px;
-    padding: 10px 40px;
-	background:#009edf;
-	    color: #FFF;
-    text-shadow: none;
-	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
--moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-
-}
-span.input-group-addon i {
-    color: #009edf;
-    font-size: 17px;
-}
-
-.login-button{
-	margin-top: 5px;
-}
-
-.login-register{
-	font-size: 11px;
-	text-align: center;
-}
+.col-xs-4.female {
+     color: white;
+     font-size: 13px;
+     margin-top: 9px;
+     padding-bottom: 16px;
+	 padding-right: 95px;
+}	
+/*------------For submit button---------*/
+.sbutton{
+	 color: white;
+     font-size: 20px;
+     border: 1px solid white;
+     background-color: #080808;
+     width: 32%;
+     margin-left: 41%;
+     margin-top: 16px;
+	 box-shadow: 0px 2px 2px 0px white;
+  	   
+   }
+.btn.btn-warning:hover {
+    box-shadow: 2px 1px 2px 3px #99ccff;
+	background:#5900a6;
+	color:#fff;
+	transition: background-color 1.15s ease-in-out,border-color 1.15s ease-in-out,box-shadow 1.15s ease-in-out;
+	
+}	 
 
 </style>
 </head>
-<body>
-
-
-		<div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-				<h2 align="center">Registracija</h2>
-					<form  id="formRegistracija" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/registracija_perform">
-						
-						<div class="form-group" align="center" >
-							<label for="name" class="cols-sm-2 control-label">Ime</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input placeholder="Vpišite ime" type="text" class="form-control" name="ime" id="ime"  required/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group" align="center" >
-							<label for="email" class="cols-sm-2 control-label">Priimek</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+<body> 
+ <div class="container">
+ <!---heading---->
+     <header class="heading"> Registracija</header><hr></hr>
+	<!---Form starting----> 
+	<div class="row ">
+	 <!--- For Name---->
+         <div class="col-sm-12">
+             <div class="row">
+			     <div class="col-xs-4">
+          	         <label class="firstname">Ime :</label> </div>
+		         <div class="col-xs-8">
+		           <input placeholder="Vpišite ime" type="text" class="form-control" name="ime" id="ime"  required/>
+             </div>
+		      </div>
+		 </div>
+		 
+		 
+         <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+                     <label class="lastname">Priimek :</label></div>
+				<div class ="col-xs-8">	 
 			<input placeholder="Vpišite priimek" type="text" name="priimek" id="priimek" class="form-control" required>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group" align="center" >
-							<label for="email" class="cols-sm-2 control-label">Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                </div>
+		     </div>
+		 </div>
+     <!-----For email---->
+		 <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+		             <label class="mail">Email :</label></div>
+			     <div class="col-xs-8"	>	 
 								<input placeholder="Vpišite vaš email račun" class="form-control" type="text" name="email" id="email" required>
-								</div>
-							</div>
-						</div>
-						<div class="form-group" align="center" >
-							<label for="email" class="cols-sm-2 control-label">Ponovno vpišite email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+		         </div>
+		     </div>
+		 </div>
+		 <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+		             <label class="mail" >Potrditev Email-a :</label></div>
+			     <div class="col-xs-8"	>	 
 			<input placeholder="Vpišite še enkrat vaš e-mail" type="text"  class="form-control" name="emailPonovno" id="emailPonovno" required>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="form-group" align="center" >
-							<label for="password" class="cols-sm-2 control-label">Geslo</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+		         </div>
+		     </div>
+		 </div>
+	 <!-----For Password and confirm password---->
+          <div class="col-sm-12">
+		         <div class="row">
+				     <div class="col-xs-4">
+		 	              <label class="pass">Potrditev gesla :</label></div>
+				  <div class="col-xs-8">
 			<input placeholder="Vpišite geslo" type="password" name="geslo" id="geslo" class="form-control" required>
-								</div>
-							</div>
-						</div> 
-
-						<div class="form-group" align="center" > 
-							<label for="confirm" class="cols-sm-2 control-label">Potrdite geslo</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+				 </div>
+          </div>
+		  </div>
+		  
+          <div class="col-sm-12">
+		         <div class="row">
+				     <div class="col-xs-4">
+		 	              <label class="pass">potrditev gesla :</label></div>
+				  <div class="col-xs-8">
 			<input placeholder="Vpišite še enkrat geslo" class="form-control" type="password" name="gesloPonovno" id="gesloPonovno" required>
-								</div>
-							</div>
-						</div>
-
+				 </div>
+          </div>
+		  </div>
+		  
 					<button align="center" id="button"  type="submit">REGISTRACIJA</button>
-						
-					</form>
-				</div>
-			</div>
-		</div>
+	 </div>	 
+		 		 
+		 
+</div>
 
 
 		
