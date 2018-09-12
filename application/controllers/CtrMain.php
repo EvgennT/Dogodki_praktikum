@@ -318,10 +318,6 @@ class CtrMain extends CI_Controller {
 
 			$idUporabnika = $Context->getIdUporabnika();
 
-			
-
-			
-
 			$result = $ModelDogodki->odjavaIzDogodka($idUporabnika, $idDogodka);
 
 			
