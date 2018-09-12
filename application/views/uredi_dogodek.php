@@ -464,13 +464,13 @@ resize: vertical;
 	        {
 		        if(data == 1)
 		        {
-		        	document.getElementById("rezultat").innerHTML = "Dogodek uspešno urejen";
+		        	document.getElementById("rezultat").innerHTML = "<p  class='alert alert-success' role='alert'>Dogodek uspešno dodan. S gumbom NAZAJ se vrnete na pregled dogodkov.</p>";
 			    } else {
-		        	document.getElementById("rezultat").innerHTML = "Napaka pri urejanju dogodka";
+		        	document.getElementById("rezultat").innerHTML = "<p  class='alert alert-danger' role='alert'>Dogodek uspešno dodan. S gumbom NAZAJ se vrnete na pregled dogodkov.</p>";
 			    }
 	        },
 	        error: function (jXHR, textStatus, errorThrown) {
-	        	document.getElementById("rezultat").innerHTML = "Napaka pri urejanju dogodka";
+	        	document.getElementById("rezultat").innerHTML = "<p  class='alert alert-danger' role='alert'>Dogodek uspešno dodan. S gumbom NAZAJ se vrnete na pregled dogodkov.</p>";
 		        alert(errorThrown);
 	        }
 	    });
