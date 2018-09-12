@@ -1,0 +1,123 @@
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `surname` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `type` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `users` (`id`, `username`, `name`, `surname`, `email`, `password`, `type`) VALUES
+(1, 'admin', 'Admin', 'Adminski', 'admin@admin.com', 'admin', 1);
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `location` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `time_start` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `duration` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE TABLE `dogodki` (
+  `id` int(11) NOT NULL,
+  `ime` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `lokacija` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `zacetek` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `trajanje` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `opis` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `dogodki` (`id`, `ime`, `lokacija`, `zacetek`, `trajanje`, `opis`) VALUES
+(2, 'TEST', 'TTT', 'TTEE', 'AAA', 'gagaggaga'),
+(3, 'TEST', 'TTT', 'TTEE', 'AAA', 'gagaggaga'),
+(4, '4241', '421', '5', '543', '			534');
+
+CREATE TABLE `dogodki_prijava` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `uporabniki` (
+  `id` int(11) NOT NULL,
+  `ime` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `priimek` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `geslo` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `tip` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `uporabniki` (`id`, `ime`, `priimek`, `email`, `geslo`, `tip`) VALUES
+(1, 'Admin', 'Adminski', 'admin@admin.com', 'admin', 1);
+
+ALTER TABLE `dogodki`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `dogodki_prijava`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `uporabniki`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `dogodki`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+ALTER TABLE `dogodki_prijava`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `uporabniki`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `dogodki_prijava` CHANGE `event_id` `id_dogodka` INT(11) NOT NULL;
+  ALTER TABLE `dogodki_prijava` CHANGE `user_id` `id_uporabnika` INT(11) NOT NULL;
+
+ALTER TABLE `dogodki` CHANGE `zacetek` `zacetek` TIMESTAMP NOT NULL;
+ALTER TABLE `dogodki` CHANGE `trajanje` `trajanje` TIMESTAMP NOT NULL;
+ALTER TABLE `dogodki` ADD `termin` TIMESTAMP NOT NULL AFTER `trajanje`, ADD `min_udelezencev` INT NOT NULL AFTER `termin`, ADD `max_udelezencev` INT NOT NULL AFTER `min_udelezencev`;
+ALTER TABLE `dogodki` CHANGE `zacetek` `zacetek` INT(11) NOT NULL;
+ALTER TABLE `dogodki` CHANGE `trajanje` `trajanje` INT(11) NOT NULL;
+ALTER TABLE `dogodki` CHANGE `termin` `termin` INT(11) NOT NULL;
+
+ALTER TABLE dogodki_prijava ADD prisotnost VARCHAR(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL AFTER id_dogodka;
+UPDATE dogodki_prijava SET prisotnost = 'N';
+
+ALTER TABLE dogodki_prijava ADD ocena INT(1) NOT NULL AFTER prisotnost;
+
+ALTER TABLE dogodki ADD slika VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL AFTER opis;
+
+
+INSERT INTO `uporabniki` (`id`, `ime`, `priimek`, `email`, `geslo`, `tip`) VALUES (2, 'admin', 'Admin', 'admin@admin.com', 'admin', 1)
+
+
+
+
