@@ -1,7 +1,7 @@
 <?php
 class Context {
 	
-	function login($email, $password)
+	function login($email, $geslo)
 	{
 		//Checks username and password.
 		//Sets session data if correct.
@@ -9,17 +9,17 @@ class Context {
 		//Returns false on failure.
 		
 		$CI =& get_instance();
-		$CI->load->model('ModelUsers');
+		$CI->load->model('ModelUporabniki');
 		
-		$modelUsers = new ModelUsers();
-		$user = $modelUsers->getUser($email, $password);
+		$ModelUporabniki = new ModelUporabniki();
+		$user = $ModelUporabniki->getUporabnika($email, $geslo);
 		
 		if ($user)
 		{
 			$userdata = array(
 					'loggedIn' => true,
 					'userId' => $user->id,
-					'userType' => $user->type
+					'userType' => $user->tip
 			);
 			
 			$CI->load->library('session');
@@ -52,7 +52,7 @@ class Context {
 		return $CI->session->userdata('loggedIn');
 	}
 	
-	function getUserId()
+	function getIdUporabnika()
 	{
 		$CI =& get_instance();
 		$CI->load->library('session');
@@ -64,7 +64,7 @@ class Context {
 		}
 	}
 	
-	function getUserType()
+	function getTipUporabnika()
 	{
 		$CI =& get_instance();
 		$CI->load->database();
@@ -74,12 +74,12 @@ class Context {
 		{
 			$userId = $CI->session->userdata('userId');
 			
-			$CI->load->model('ModelUsers');
-			$modelUsers = new ModelUsers();
-			$userType = $modelUsers->getUserType($userId); //dobi iz modela userjev tip za trenutnega prijavljenega uporabnika
+			$CI->load->model('ModelUporabniki');
+			$ModelUporabniki = new ModelUporabniki();
+			$tipUporabnika = $ModelUporabniki->getTipUporabnika($userId); //dobi iz modela userjev tip za trenutnega prijavljenega uporabnika
 			
 			
-			return $userType;
+			return $tipUporabnika;
 		}
 		else {
 			return 0;
