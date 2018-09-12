@@ -216,17 +216,25 @@ table td.r, table th.r {
 
 
 blockquote {
+	font-family: "Arial Black", Gadget, sans-serif;
   color: white;
   text-align: center;
 }
-.naslov1{
-color: #666666;
-  text-decoration: none;
-  font-weight:bold;
-  }
+.naslov1 {
+font-family: "Arial Black", Gadget, sans-serif;
+font-size: 28px;
+letter-spacing: -1.4px;
+word-spacing: 1.6px;
+color: #E5E5E5;
+font-weight: 400;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: small-caps;
+text-transform: capitalize;
+}
   #glava{
 	  
-	  color:white; 
+	  color:#e5e5e5; 
 	  backdrop-filter: blur(5px);
 	  font-family: 'Times New Roman', Times, serif;
   }
@@ -306,24 +314,24 @@ color: #666666;
 						if(isset($dogodek->id_uporabnika))  //če ima id_uporabnika pomeni da je ta uporabnik že prijavlen na ta dogodek, zato mu ponudimo odjavo
 						{
 						?>
-						<td><button onclick="odjavaIzDogodka(<?php echo $dogodek->id;?>)" class="GumbObDogodkih">ODJAVA</button></td>
+						<td><button onclick="odjavaIzDogodka(<?php echo $dogodek->id;?>)" class="gumbDodajDogodek">ODJAVA</button></td>
 						<?php 
 						}
 						else 
 						{
 						?>
-						<td><button onclick="prijavaNaDogodek(<?php echo $dogodek->id;?>)" class="GumbObDogodkih">PRIJAVA</button></td>
+						<td><button onclick="prijavaNaDogodek(<?php echo $dogodek->id;?>)" class="gumbDodajDogodek">PRIJAVA</button></td>
 						<?php 
 						}
 					}
 					?>
-					<td colspan="2"><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>" class="GumbObDogodkih">PREGLED</a></td>
+					<td colspan="2"><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>" class="gumbDodajDogodek">PREGLED</a></td>
 					
 					<?php 
 					if($tipUporabnika == 1) 
 					{
 					?>
-					<td colspan="2" ><a href="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek/<?php echo $dogodek->id; ?>" class="GumbObDogodkih">UREDI</a></td>
+					<td colspan="2" ><a href="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek/<?php echo $dogodek->id; ?>" class="gumbDodajDogodek">UREDI</a></td>
 					<?php
 					}
 					?>
@@ -389,6 +397,55 @@ color: #666666;
 	</div>
 	
 </div>
+<script>
+
+	
+	function prijavaNaDogodek(idDogodka) //javaskript fukncija, ki te preko posta prijavi na dogodek 
+	{
+		//alert(idDogodka);
+		$.ajax({
+	        url : "http://localhost/Dogodki_praktikum/CtrMain/prijava_na_dogodek",
+	        type: "POST",
+	        data: {'idDogodka': idDogodka},
+	        success: function (data) 
+	        {
+	        	if(data == 1) {
+					alert("Uspešno prijavlen na dogodek");
+					location.reload();
+			    } else {
+					alert("Napaka");
+					location.reload();
+				}
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+		        alert(errorThrown);
+	        }
+	    });
+	}
+	
+	function odjavaIzDogodka(idDogodka)
+	{
+		$.ajax({
+	        url : "http://localhost/Dogodki_praktikum/CtrMain/odjava_iz_dogodka",
+	        type: "POST",
+	        data: {'idDogodka': idDogodka},
+	        success: function (data) 
+	        {
+	        	if(data == 1) {
+					alert("Uspešno odjavljeni iz dogodka");
+					location.reload();
+			    } else {
+					alert("Napaka");
+					location.reload();
+				}
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+		        alert(errorThrown);
+	        }
+	    });
+	}
+	
+	</script> 
 </body>
 </html>
 
