@@ -177,7 +177,7 @@
 	        }
 	    });
 	}
-	
+	 
 	function PotrdiPrisotnost(idUporabnika, idDogodka)
 	{
 		//alert(idDogodka);
