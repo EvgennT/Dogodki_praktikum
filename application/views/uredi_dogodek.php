@@ -206,7 +206,7 @@ resize: vertical;
 </article>
 	<div id="container" class="row">
 			<a style="float:left;" href="<?php echo $this->config->base_url(); ?>CtrMain"  class="gumbDodajDogodek" >NAZAJ</a>
-</br>
+</br></br></br>
 	
 		<form   class="col-10"  class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
 			<table style="background: #FBEEC1; ">
@@ -222,7 +222,6 @@ resize: vertical;
 			{
 			?>
 				<a href="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>"><img src="<?php echo $this->config->base_url(); ?>slike/<?php echo $dogodek->slika; ?>" alt="<?php echo $dogodek->slika; ?>" height="150"></a>
-				<br/>
 				<br/>
 			<?php 
 			}
