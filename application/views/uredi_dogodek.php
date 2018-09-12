@@ -199,10 +199,21 @@ resize: vertical;
 
 </style>
 <body>
+<article>
+  <header>
+    <h1 id="glava" >Urejanje dogodka</h1>
+  </header>
+</article>
 	<div id="container" class="row">
+			<a style="float:left;" href="<?php echo $this->config->base_url(); ?>CtrMain"  class="gumbDodajDogodek" >NAZAJ</a>
+</br>
 	
 		<form   class="col-10"  class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
 			<table style="background: #FBEEC1; ">
+			
+			
+			<tr >
+			<td  colspan="2" ><center>
 			<input type="hidden" name="idDogodka" id="idDogodka" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
 			
 			<?php 
@@ -215,7 +226,11 @@ resize: vertical;
 				<br/>
 			<?php 
 			}
-			?>			
+			?>	</center>
+			</td>
+			</tr>
+
+			
 			<tr >
 			<td style="background: #8EE4AF;">
 			<label>Ime dogodka</label>
@@ -330,7 +345,7 @@ resize: vertical;
 			<tr>
 			<td colspan="2" >
 			<center>
-			<button type="submit">UREDI</button>
+			<button type="submit"  class="gumbDodajDogodek" >UREDI</button>
 			</center>
 			</td>			
 			</tr>
@@ -338,26 +353,32 @@ resize: vertical;
 			
 			</table>	
 		</form>
-				
-		<br/>
-		<br/>
-		
-		<form id="formNaloziSliko" action="<?php echo $this->config->base_url(); ?>CtrMain/nalozi_sliko" method="post" enctype="multipart/form-data">
 		
 		
+		<form class="col-10"  class="form-horizontal" id="formNaloziSliko" action="<?php echo $this->config->base_url(); ?>CtrMain/nalozi_sliko" method="post" enctype="multipart/form-data">
+		<table style="background: #8EE4AF; "> 
+		<tr>
+		<td colspan="2" >		    
+		Izberite sliko dogodka: <!-- https://www.w3schools.com/php/php_file_upload.asp -->
+		</td>
+		</tr>
+		
+		<tr >
+			<td style="background: #FBEEC1;">
 			<input type="hidden" name="idDogodkaSlika" id="idDogodkaSlika" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
 		
-		    Izberite sliko dogodka: <!-- https://www.w3schools.com/php/php_file_upload.asp -->
-		    <input type="file" name="fileToUpload" id="fileToUpload">
-		    <input type="submit" value="Naloži" name="submit">
-		</form>
+		    <input type="file"  class="gumbDodajDogodek" name="fileToUpload" id="fileToUpload">
+			
+		    <input type="submit" class="gumbDodajDogodek" value="Naloži" name="submit">
+			</td>
+			</tr>
+		</table></form>
 		<br/>
 		<br/>
 			
 		
-		<button onclick="izbrisi(<?php echo $dogodek->id;?>)">IZBRIŠI DOGODEK</button> <!-- gumb damo izven form, drugace hoce submitati formo -->
+		<button onclick="izbrisi(<?php echo $dogodek->id;?>)"  class="gumbDodajDogodek" >IZBRIŠI DOGODEK</button> <!-- gumb damo izven form, drugace hoce submitati formo -->
 		<br/>
-		<a href="<?php echo $this->config->base_url(); ?>CtrMain">NAZAJ</a>
 
 		<p id="rezultat"></p>
 
