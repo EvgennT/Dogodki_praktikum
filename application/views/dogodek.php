@@ -343,6 +343,9 @@ resize: vertical;
 			</tr>
 			
 		
+			</table>	
+		</form>
+	
 		
 		<?php 
 		$trenutniCasTimestamp = time() + 7200;
@@ -386,9 +389,6 @@ resize: vertical;
 	
 			
 			
-			</table>	
-		</form>
-	
 		<?php 
 		if($tipUporabnika == 1) //prikažemo seznam prijavljenih uporabnikov samo organizatorju
 		{
