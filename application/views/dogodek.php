@@ -341,20 +341,27 @@ resize: vertical;
 			<?php echo $dogodek->opis; ?>
 			</td>
 			</tr>
-			
-		
-			</table>	
-		</form>
-		
-		
-		<?php 
+			<?php 
 		$trenutniCasTimestamp = time() + 7200;
 		
 		if($dogodek->termin < $trenutniCasTimestamp) //če je timestamp trenutnega časa večji je dogodek potekel in lahko prikažemo oceno
 		{
 		?>
 		
-		<p style="color:yellow">Ocena dogodka: <?php echo $ocena; ?></p>
+			<tr >
+			<td style="background: #8EE4AF;">
+			<label>Ocena dogodka</label>
+			</td>
+			<td>
+			<?php echo $ocena; ?>
+			</td>
+			</tr>
+		
+			</table>	
+		</form>
+		
+		
+		
 		
 		<?php 
 		if($dogodek->prisotnost == "Y") // če je bil uporabnik prisoten lahko tudi dogodek oceni

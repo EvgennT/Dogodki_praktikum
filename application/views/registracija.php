@@ -175,7 +175,7 @@ h1 {
 
 <article>
   <header>
-    <h1 style="color:yellow" id="glava" >Registracija</h1>
+    <h1 style="color:white" id="glava" >Registracija</h1>
   </header>
 </article>
 	<div id="container" class="row">
