@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DODAJ DOGODEK</title>
+	<title>UREDI DOGODEK</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- nucamo jquery da lahko postamo ($.ajax({...) -->
 	
 	
@@ -17,16 +17,18 @@
 	<div id="container">
 	
 		
-		<form class="form-horizontal" id="formAddDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/dodaj_dogodek_perform">
+		<form class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
+			
+			<input type="hidden" name="idDogodka" id="idDogodka" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
 			
 			<label>Ime dogodka</label>
-			<input type="text" name="imeDogodka" id="imeDogodka" required>
+			<input type="text" name="imeDogodka" id="imeDogodka" required value="<?php echo $dogodek->ime; ?>">
 			
 			<br/>
 			<br/>
 			
 			<label>Lokacija dogodka</label>
-			<input type="text" name="prostorDogodka" id="prostorDogodka" required>
+			<input type="text" name="prostorDogodka" id="prostorDogodka" required value="<?php echo $dogodek->lokacija; ?>">
 			
 			<br/>
 			
@@ -34,13 +36,14 @@
 			<div class="form-group col-md-6">
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Začetek dogodka</label>
 				<div class="input-group date col-sm-4" id="datetimepicker1">
-					<input type='text' class="form-control" name="zacetekDogodka" id="zacetekDogodka" required />
+					<input type='text' class="form-control" name="zacetekDogodka" id="zacetekDogodka" required value="<?php echo date('d-m-Y H:i', $dogodek->zacetek); ?>"/>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
 				</div>
 			</div>
 			
+			<br/>
 			<br/>
 			<br/>
 			<br/>
@@ -48,7 +51,7 @@
 			<div class="form-group col-md-6">
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Trajanje dogodka</label>
 				<div class="input-group date col-sm-4" id="datetimepicker2">
-					<input type='text' class="form-control" name="trajanjeDogodka" id="trajanjeDogodka" required />
+					<input type='text' class="form-control" name="trajanjeDogodka" id="trajanjeDogodka" required value="<?php echo date('d-m-Y H:i', $dogodek->trajanje); ?>"/>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
@@ -58,11 +61,12 @@
 			<br/>
 			<br/>
 			<br/>
+			<br/>
 
 			<div class="form-group col-md-6">
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Termin prijave/odjave</label>
 				<div class="input-group date col-sm-4" id="datetimepicker3">
-					<input type='text' class="form-control" name="terminDogodka" id="terminDogodka" required />
+					<input type='text' class="form-control" name="terminDogodka" id="terminDogodka" required value="<?php echo date('d-m-Y H:i', $dogodek->termin); ?>"/>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
@@ -76,29 +80,32 @@
 			<br/>
 			
 			<label>Min. število udeležencev</label>
-			<input type="number" name="minUdelezencev" id="minUdelezencev" required>
+			<input type="number" name="minUdelezencev" id="minUdelezencev" required value="<?php echo $dogodek->min_udelezencev; ?>">
 			
 			<br/>
 			<br/>
 			
 			<label>Max. število udeležencev</label>
-			<input type="number" name="maxUdelezencev" id="maxUdelezencev" required>
+			<input type="number" name="maxUdelezencev" id="maxUdelezencev" required value="<?php echo $dogodek->max_udelezencev; ?>">
 			
 			<br/>
 			<br/>
 			
 			<label>Opis dogodka</label>
 			<textarea name="opisDogodka" id="opisDogodka" >
+			<?php echo $dogodek->opis; ?>
 			</textarea>
 			
 			<br/>
 			<br/>
 			
-			<button type="submit">SHRANI</button>
-			<br/>
-			<a href="<?php echo $this->config->base_url(); ?>CtrMain">NAZAJ</a>
+			<button type="submit">UREDI</button>
 				
 		</form>
+		<br/>
+		<button onclick="izbrisi(<?php echo $dogodek->id;?>)">IZBRIŠI</button> <!-- gumb damo izven form, drugace hoce submitati formo -->
+		<br/>
+		<a href="<?php echo $this->config->base_url(); ?>CtrMain">NAZAJ</a>
 
 		<p id="rezultat"></p>
 
@@ -106,6 +113,42 @@
 	
 	
 	<script>
+
+
+	
+	function izbrisi(idDogodka)
+	{
+		//var txt;
+	    var r = confirm("Izbrišem dogodek?"); //okno za portditev pred brisanjem
+	    if (r == true) {
+	        izbrisiDogodek(idDogodka);
+	    } else {
+	        //txt = "You pressed Cancel!";
+	    }
+	}
+
+	function izbrisiDogodek(idDogodka)
+	{
+		
+		$.ajax({
+	        url : "http://localhost/Dogodki_praktikum/CtrMain/izbrisi_dogodek_perform",
+	        type: "POST",
+	        data: {'idDogodka': idDogodka},
+	        success: function (data) 
+	        {
+	        	if(data == 1) {
+					alert("Dogodek izbrisan");
+					window.location.replace("http://localhost/Dogodki_praktikum/CtrMain"); //če izbrisan preusmerimo na glavno stran
+			    } else {
+					alert("Napaka");
+					location.reload();
+				}
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+		        alert(errorThrown);
+	        }
+	    });
+	}
 
     $(function () {
         $('#datetimepicker1').datetimepicker({
@@ -119,7 +162,7 @@
         });
     });
 
-	$('#formAddDogodek').on('submit', function (e) 
+	$('#formUrediDogodek').on('submit', function (e) 
 	{
         e.preventDefault(); //preprečimo da se forma submita in preusmeri na drugo stran ampak naredimo po svoje s postom v javaskriptu
 	    $.ajax({
@@ -130,13 +173,13 @@
 	        {
 		        if(data == 1)
 		        {
-		        	document.getElementById("rezultat").innerHTML = "Dogodek uspešno dodan";
+		        	document.getElementById("rezultat").innerHTML = "Dogodek uspešno urejen";
 			    } else {
-		        	document.getElementById("rezultat").innerHTML = "Napaka pri dodajanju dogodka";
+		        	document.getElementById("rezultat").innerHTML = "Napaka pri urejanju dogodka";
 			    }
 	        },
 	        error: function (jXHR, textStatus, errorThrown) {
-	        	document.getElementById("rezultat").innerHTML = "Napaka pri dodajanju dogodka";
+	        	document.getElementById("rezultat").innerHTML = "Napaka pri urejanju dogodka";
 		        alert(errorThrown);
 	        }
 	    });

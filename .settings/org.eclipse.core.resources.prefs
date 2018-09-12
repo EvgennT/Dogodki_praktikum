@@ -3,5 +3,7 @@ encoding//application/controllers/CtrMain.php=UTF-8
 encoding//application/models/ModelDogodki.php=UTF-8
 encoding//application/models/ModelUporabniki.php=UTF-8
 encoding//application/views/dodaj_dogodek.php=UTF-8
+encoding//application/views/dogodek.php=UTF-8
 encoding//application/views/login.php=UTF-8
 encoding//application/views/main_page.php=UTF-8
+encoding//application/views/uredi_dogodek.php=UTF-8
