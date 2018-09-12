@@ -9,10 +9,10 @@
 	<div id="container">
 	
 		<?php
-		if($userType == 1) //če je prijavljen uporabnik admin potem prikažemo gumb za dodajanje dogodka 
+		if($tipUporabnika == 1) //če je prijavljen uporabnik admin potem prikažemo gumb za dodajanje dogodka 
 		{
 		?>
-			<a href="<?php echo $this->config->base_url(); ?>CtrMain/add_event">Dodaj dogodek</a>
+			<a href="<?php echo $this->config->base_url(); ?>CtrMain/dodaj_dogodek">Dodaj dogodek</a>
 			<br/>
 			<br/>
 		<?php 
@@ -28,12 +28,12 @@
 			</thead>
 			<tbody>
 			<?php 
-			foreach ($events as $event)
+			foreach ($dogodki as $dogodek)
 			{
 			?>
 				<tr>
-					<td><?php echo $event->name; ?></td>
-					<td><?php echo $event->location; ?></td>
+					<td><?php echo $dogodek->ime; ?></td>
+					<td><?php echo $dogodek->lokacija; ?></td>
 					<td><button>PRIJAVA</button></td>
 				</tr>
 			<?php
