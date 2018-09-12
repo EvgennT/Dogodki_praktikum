@@ -11,9 +11,9 @@
 
 ## Kompatibilnost
 
-|    CodeIgniter    | PHP	 |		Apache	|		WAMP	 |			|
+|    CodeIgniter    | PHP	 |		Apache	|		WAMP	 |	
 | ----------------- |------|------|------|------|
-|    3.1.9         | 5.6.35 |	2.4.33		|	3.0.6		 |			|
+|    3.1.9         | 5.6.35 |	2.4.33		|	3.0.6		 |
 
 
 
@@ -60,6 +60,28 @@
 
 
 ## Potek dela
+
+
+|    Verzija    | Opis	 |
+| -------- |------|
+|      1  | 	Povezava projekta z GitHUb-om. |
+|     2   | 	Ustvarjena podatkovna baza. |
+|      3  | 	Prijava, vnos dogodka. |
+|     4   | Spremembe v bazi.	 |
+|    5    | 	Prijava in odjava z dogodka. |
+|    6    | Vpogled v dogodek, pregled prijavlenih (organizator).	 |
+|    7    | Spremembe v bazi (tip datuma, termin, min udeležencev, max udeležencev).	 |
+|   8     | 	Dojava s strani. |
+|   9     | Ločevanje med preteklimi in prihajajoči dogodki.	 |
+|   10     | 	Urejanje, brisanje dogodka (organizator). |
+|     11   | 	Potrjevanje prisotnosti. |
+|     12   | Mail.	 |
+|    13    | Registracija uporabnika.	 |
+|    14    | Podajanje ocen prisotnih oseb.	Prikaz ocene na glavni strani. |
+|     15   | 	Nalaganje slik. |
+|      16  | Verzija	 |
+|     17   | Verzija	 |
+|     18   | 	Verzija |
 
 ## Avtorji
 [<img alt="Evgen Tušek" src="https://avatars2.githubusercontent.com/u/39327068?s=460&v=4" width="117">](https://github.com/EvgennT)|[<img alt="Marko Pavičević" src="https://avatars2.githubusercontent.com/u/33724686?s=460&v=4" width="117">](https://github.com/PavicevicMarko)|[<img alt="Toni Žunec" src="https://avatars1.githubusercontent.com/u/33753063?s=460&v=4" width="117">](https://github.com/ZunecToni)|
