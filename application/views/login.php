@@ -123,6 +123,10 @@ h1 {
 	  backdrop-filter: blur(5px);
 	  font-family: 'Times New Roman', Times, serif;
   }
+  .rcorners1 {
+    border: 5px solid #FBEEC1;
+    border-radius: 1em;
+}
   
 
 </style>
@@ -138,8 +142,8 @@ h1 {
 	
 		
 		</br>
-		
-		<form id="formLogin" method="post" role="form" action="http://localhost/Dogodki_praktikum/CtrMain/login_perform">
+		<center>
+		<form class="col-3 rcorners1" class="" id="formLogin" method="post" role="form" action="http://localhost/Dogodki_praktikum/CtrMain/login_perform">
 			<table   style="background: #FBEEC1;">
 			
 			<tr class="col-1">
@@ -170,6 +174,7 @@ h1 {
 			
 				
 		</form>
+		</center>
 	</div>
 	
 	
