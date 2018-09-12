@@ -13,9 +13,7 @@
 	  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
 
 </head><style>
-
 body {}
-
 body {
   background-image: url("https://cdn.zuerich.com/sites/default/files/styles/sharing/public/web_zuerich_home_topevents_1600x900.jpg?itok=yjC-dXXH");
   
@@ -27,7 +25,6 @@ body {
 }
 <!--filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', endColorstr='#c5deea',GradientType=0 );
 }>-->
-
 .GumbObDogodkih {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -45,13 +42,11 @@ body {
   background: #f7f7f7;
   border: 1px solid #8b8b8b;
 }
-
 .GumbObDogodkih:active {
   background: #2e2e2e;
   border: 1px solid black;
   color: white;
   }
-
 .gumbDodajDogodek {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -92,7 +87,6 @@ body {
 	position:relative;
 	top:1px;
 }
-
 h1 {
     text-align: center;
     width: 100%;
@@ -101,7 +95,6 @@ h1 {
 	text-color:blue;
     padding: 10px;
 }
-
 h3, h4 {
     text-align: center;
     width: 100%;
@@ -127,7 +120,6 @@ text-align: center;
 .col-10 {width: 83.33%;}
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
-
 table {
   border-spacing: 1;
   border-collapse: collapse;
@@ -168,10 +160,6 @@ table td.c, table th.c {
 table td.r, table th.r {
   text-align: center;
 }
-
-
-
-
 blockquote {
   color: white;
   text-align: center;
@@ -191,12 +179,10 @@ color: #666666;
   input, textarea{
 width:100%;
 }
-
 textarea{
 resize: vertical;
 } 
   
-
 </style>
 <body>
 <article>
@@ -385,9 +371,6 @@ resize: vertical;
 	
 	
 	<script>
-
-
-
 	/* $('#formNaloziSliko').on('submit', function (e) 
 	{
         e.preventDefault(); //preprečimo da se forma submita in preusmeri na drugo stran ampak naredimo po svoje s postom v javaskriptu
@@ -417,7 +400,6 @@ resize: vertical;
 	        //txt = "You pressed Cancel!";
 	    }
 	}
-
 	function izbrisiDogodek(idDogodka)
 	{
 		
@@ -440,7 +422,6 @@ resize: vertical;
 	        }
 	    });
 	}
-
     $(function () {
         $('#datetimepicker1').datetimepicker({
             format: 'DD-MM-YYYY HH:mm'
@@ -452,7 +433,6 @@ resize: vertical;
             format: 'DD-MM-YYYY HH:mm'
         });
     });
-
 	$('#formUrediDogodek').on('submit', function (e) 
 	{
         e.preventDefault(); //preprečimo da se forma submita in preusmeri na drugo stran ampak naredimo po svoje s postom v javaskriptu
