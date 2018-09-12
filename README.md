@@ -8,11 +8,20 @@
 
 ## O projektu
 
+Projket za ustvarjanja spletne aplikacije za pregled, prijavljanje, spremljanja dogodkov.
+Spletna aplikacija zajema fukcionalnosti:
+1. registracija, prijava, odjava
+2. dva tipa uporabnikov: organizator, uporabnik
+3. dodajanje slik, urejanje dogodka, ločevanje med prihajajočimi in poteklimi dogodki
+4. ocenjevanje dogodkov, preverjanje prisotnosti
+5. sporočanje po e-pošti
+
+
 
 ## Kompatibilnost
 
-|    CodeIgniter    | PHP	 |		Apache	|		WAMP	 |	
-| ----------------- |------|------|------|------|
+|    CodeIgniter    | PHP	 |		Apache	|		WAMP	 |
+| ----------------- |------|------|------|
 |    3.1.9         | 5.6.35 |	2.4.33		|	3.0.6		 |
 
 
