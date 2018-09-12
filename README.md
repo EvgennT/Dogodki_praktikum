@@ -43,8 +43,8 @@ Za vzpostavitev podatkovne baze phpMyAdmin, sledite tem navodilom.
 2. V odprtem oknu, spodaj levo, poiščete povezavo phpMyAdmin.
 3. Prijavite se z uporabniškim imenom "root".
 4. Na levi strani kliknete "Novo", da ustvarite novo bazo. Poimenujete jo praktikum.
-5. Kliknete na novo ustvarjeno bazo, v zgornji vrstivi izberete SQL in v polje prekopirate celotno vsebino datoteke XXX. Za potrditev izberite Izvedi. 
-6. Po dokončanih korakih ponovno poženete WAMP in odprete spletno stran.
+5. Kliknete na novo ustvarjeno bazo, v zgornji vrstivi izberete SQL in v polje prekopirate celotno vsebino datoteke "SQLstavki". Za potrditev izberite Izvedi. 
+6. Po dokončanih korakih ponovno poženete WAMP in odprete spletno stran. Dostop je ustvarjen preko e-maila: admin@admin.com in gesla: admin.
 
 
  ## Za spreminjanje kode
