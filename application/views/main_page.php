@@ -11,6 +11,17 @@
 </head>
 <style>
 
+body {}
+
+body {
+  background-image: url("https://cdn.zuerich.com/sites/default/files/styles/sharing/public/web_zuerich_home_topevents_1600x900.jpg?itok=yjC-dXXH");
+  
+  background-size: 2000px 1000px;
+	
+ <!-- font: 400 14px 'Calibri','Arial';-->
+  padding: 20px;
+  margin:5%;padding:5;
+}
 <!--filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', endColorstr='#c5deea',GradientType=0 );
 }>-->
 
@@ -84,7 +95,7 @@ h1 {
     width: 100%;
 	font-size: 500%;
 	<!--font-family: 'Holtwood One SC';-->
-	background-color:blue;
+	text-color:blue;
     padding: 10px;
 }
 
@@ -113,6 +124,7 @@ text-align: center;
 .col-10 {width: 83.33%;}
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
+
 table {
   border-spacing: 1;
   border-collapse: collapse;
@@ -201,14 +213,7 @@ table td.r, table th.r {
   }
   
 }
-body {
-  background-image: url("https://cdn.zuerich.com/sites/default/files/styles/sharing/public/web_zuerich_home_topevents_1600x900.jpg?itok=yjC-dXXH");
-  
-  background-size: 2000px 1000px;
-	
- <!-- font: 400 14px 'Calibri','Arial';-->
-  padding: 20px;
-}
+
 
 blockquote {
   color: white;
@@ -219,6 +224,12 @@ color: #666666;
   text-decoration: none;
   font-weight:bold;
   }
+  #glava{
+	  
+	  color:white; 
+	  backdrop-filter: blur(5px);
+	  font-family: 'Times New Roman', Times, serif;
+  }
   
 
 </style>
@@ -226,7 +237,7 @@ color: #666666;
 
 <article>
   <header>
-    <h1>Event Magician</h1>
+    <h1 id="glava" >Event Magician</h1>
   </header>
 </article>
 
