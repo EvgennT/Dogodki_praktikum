@@ -3,17 +3,54 @@
 <head>
 	<meta charset="utf-8">
 	<title>DOGODEK <?php echo $dogodek->ime;?></title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- nucamo jquery da lahko postamo ($.ajax({...) -->
-
-<style>body {margin:5%;padding:5; 
-background: #066dab;
-background: -moz-linear-gradient(top, #066dab 16%, #066dab 16%, #c5deea 89%);
-background: -webkit-linear-gradient(top, #066dab 16%,#066dab 16%,#c5deea 89%);
-background: linear-gradient(to bottom, #066dab 16%,#066dab 16%,#c5deea 89%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', endColorstr='#c5deea',GradientType=0 );
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- nucamo jquery da lahko postamo ($.ajax({...) -->
+	
+	
+	  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+	  	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"></script>
+	  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+<style>
+body {}
+body {
+  background-image: url("https://cdn.zuerich.com/sites/default/files/styles/sharing/public/web_zuerich_home_topevents_1600x900.jpg?itok=yjC-dXXH");
+  
+  background-size: 2000px 1000px;
+	
+ <!-- font: 400 14px 'Calibri','Arial';-->
+  padding: 20px;
+  margin:5%;padding:5;
 }
- 
+<!--filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', endColorstr='#c5deea',GradientType=0 );
+}>-->
 .GumbObDogodkih {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.16, rgb(207, 207, 207)), color-stop(0.79, rgb(252, 252, 252)));
+  background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+  background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%); 
+  padding: padding:6px 24px;;
+  border: 1px solid #dcdcdc;
+  color: #666666;
+  text-decoration: none;
+  font-weight:bold;
+}
+.GumbObDogodkih:hover {
+  background: #f7f7f7;
+  border: 1px solid #8b8b8b;
+}
+.GumbObDogodkih:active {
+  background: #2e2e2e;
+  border: 1px solid black;
+  color: white;
+  }
+.gumbDodajDogodek {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
 	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
 	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
@@ -22,20 +59,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', end
 	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
 	background-color:#f9f9f9;
-	-moz-border-radius:13px;
-	-webkit-border-radius:13px;
-	border-radius:13px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
 	font-family:Arial;
-	font-size:17px;
+	font-size:15px;
 	font-weight:bold;
-	padding:13px 16px;
+	padding:6px 24px;
 	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
 }
-.GumbObDogodkih:hover {
+.gumbDodajDogodek:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
 	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
 	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
@@ -45,13 +83,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', end
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
 	background-color:#e9e9e9;
 }
-.GumbObDogodkih:active {
+.gumbDodajDogodek:active {
 	position:relative;
 	top:1px;
 }
-
-
-  .col-1 {width: 14.28%;}
+h1 {
+    text-align: center;
+    width: 100%;
+	font-size: 500%;
+	<!--font-family: 'Holtwood One SC';-->
+	text-color:blue;
+    padding: 10px;
+}
+h3, h4 {
+    text-align: center;
+    width: 100%;
+    
+    padding: 10px;
+}
+table {
+text-align: center;
+}
+th{
+text-align: center;
+}
+  
+.col-1 {width: 14.28%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}
 .col-4 {width: 33.33%;}
@@ -59,59 +116,86 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', end
 .col-6 {width: 50%;}
 .col-7 {width: 58.33%;}
 .col-8 {width: 66.66%;}
-.col-9 {width: 65%;}
+.col-9 {width: 75%;}
 .col-10 {width: 83.33%;}
-.col-11 {width: 90%;}
+.col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
-  
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 }
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding: 8px;
+table * {
+  position: relative;
 }
-th
-{
-background-color:black;
-color:white;
+table td, table th {
+  padding-left: 8px;
 }
-th:first-child, td:first-child
-{
-  position:sticky;
-  left:0px;
- 
+table thead tr {
+  height: 60px;
+  font-size: 16px;
 }
- td:first-child
- {
-  background-color:grey;
- }
- .vSredino{
-    border: 1px ;
-    text-align: center;
-    padding: 8px;
+table tbody tr {
+  height: 48px;
+  border-bottom: 1px solid #ffffff;
 }
-
-input, textarea{
+table tbody tr:last-child {
+  border: 0;
+}
+table td, table th {
+  text-align: left;
+}
+table td.l, table th.l {
+  text-align: right;
+}
+table td.c, table th.c {
+  text-align: center;
+}
+table td.r, table th.r {
+  text-align: center;
+}
+blockquote {
+  color: white;
+  text-align: center;
+}
+.naslov1{
+color: #666666;
+  text-decoration: none;
+  font-weight:bold;
+  }
+  #glava{
+	  
+	  color:white; 
+	  backdrop-filter: blur(5px);
+	  font-family: 'Times New Roman', Times, serif;
+  }
+  
+  input, textarea{
 width:100%;
 }
-
 textarea{
 resize: vertical;
 } 
   
-
 </style>
 </head>
 <body>
-	<div id="container">
+
+<article>
+  <header>
+    <h1 id="glava" ><?php echo $dogodek->ime;?></h1>
+  </header>
+</article>
+	<div id="container" class="row">
+	
 	<div align="center">
-		<h1><?php echo $dogodek->ime;?></h1>
-		
+	
 			<?php 
 		
 		$trenutniCasTimestamp = time() + 7200;
@@ -132,7 +216,20 @@ resize: vertical;
 			}
 		}
 		?>
-		</br>
+</div>
+			<a style="float:left;" href="<?php echo $this->config->base_url(); ?>CtrMain"  class="gumbDodajDogodek" >NAZAJ</a>
+</br></br></br>
+
+	
+		<form   class="col-10"  class="form-horizontal" id="formUrediDogodek" method="post" role="form" action="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek_perform">
+			<table style="background: #FBEEC1; ">
+			
+			
+			<tr >
+			<td  colspan="2" ><center>
+			<input type="hidden" name="idDogodka" id="idDogodka" value="<?php echo $dogodek->id; ?>"> <!-- naredimo id skriti (hidden), da ga ne moremo spremeniti -->
+			
+			
 		<?php 
 		
 		if($dogodek->slika != "")//če ima dogodek sliko jo prikažemo, damo tudi link okoli nje da lahko odpremo celo sliko
@@ -142,114 +239,109 @@ resize: vertical;
 			<br/>
 		<?php 
 		}
-		?>	
-		
-	
-		
-		
-		
-		
-
-			<form  class="col-9"  class="center" class="form-horizontal" id="formAddDogodek" method="post" role="form" action="http://localhost/Dogodki_praktikum/CtrMain/dodaj_dogodek_perform">
-			<table width = "80%  align="center">
-			
-			<tr class="col-1">
-			<td class="col-1">
-			<label>Id dogodka</label>
+		?>	</center>
 			</td>
-			<td class="col-1">
-			<?php echo $dogodek->id;?>
+			</tr>
+
+			
+			<tr >
+			<td style="background: #8EE4AF;">
+			<label>Ime dogodka</label>
+			</td>
+			<td >
+			
+			<?php echo $dogodek->ime;?>
 			</td>
 			</tr>
 			
 			
 			
-			<tr class="col-1">
-			<td>
+			<tr >
+			<td style="background: #8EE4AF;">
 			<label>Lokacija dogodka</label>
 			</td>
-			<td>
-			<?php echo $dogodek->lokacija;?>
-			</td>
-			</tr>
-			
-			
-			<tr>
-			<td>
-			Začetek dogodka
-			</td>
-			<td>
-			<?php echo date('d/m/Y H:i', $dogodek->zacetek);?>
-			</td>
-			</tr>
-			
-			
-			<tr>
-			<td>
-		Trajanje dogodka
-			</td>
-			<td>
-			<?php echo date('d/m/Y H:i', $dogodek->trajanje);?>
-			</td>
-			</tr>
-			
-
-			<tr>
-			<td>
-		Konec odjav/prijav
-			</td>
-			<td>
-<?php echo date('d/m/Y H:i', $dogodek->termin); ?>
-			</td>
-			</tr>
-		
-			
-			
-			<tr>
-			<td>
-			<label>Minimalno udeležencev</label>
-			</td>
-			<td>
-		  <?php echo $dogodek->min_udelezencev; ?>
-			
-			</td>
-			</tr>
-			
-			<tr>
-			<td>
-			<label>Maksimalno udeležencev</label>
-			</td>
-			<td>
-		<?php echo $dogodek->max_udelezencev; ?>
-			
-			</td>
-			</tr>
-			
-			<tr>
-			<td>
-			Trenutno udeležencev
-			</td>
-			<td>
-			<?php echo count($prijavljeniNaDogodek); //count vrne število elementov v array ?>
-		
-			</td>
-			</tr>
-			
-			<tr>
 			<td >
-		Opis dogodka 
-			</td><td>
-			<?php echo $dogodek->opis; ?></td>
+			<?php echo $dogodek->lokacija; ?>
+			</td>
 			</tr>
 			
-			<table>	
-		</form>
-
-
-		</div>
-
-
-
+			
+			
+			<tr >
+			<td style="background: #8EE4AF;">
+			<div class="form-group col-md-6">
+				<label class="control-label col-sm-2" for="trajanjeDogodka">Začetek dogodka</label>
+				</td>
+			<td >
+				<div class="input-group date col-sm-4" id="datetimepicker1">
+					<?php echo date('d-m-Y H:i', $dogodek->zacetek); ?>
+				</div>
+			</div>
+			</td>
+			</tr>
+			
+			
+			
+<tr >
+			<td style="background: #8EE4AF;">
+			<div class="form-group col-md-6">
+				<label class="control-label col-sm-2" for="trajanjeDogodka">Trajanje dogodka</label>
+				</td>
+			<td >
+				<div class="input-group date col-sm-4" id="datetimepicker2">
+					<?php echo date('d-m-Y H:i', $dogodek->trajanje); ?>
+				</div>
+			</div>
+			</td>
+			</tr>
+			
+			
+<tr >
+			<td style="background: #8EE4AF;">
+			<div class="form-group col-md-6">
+				<label class="control-label col-sm-2" for="trajanjeDogodka">Termin prijave/odjave</label>
+				</td>
+			<td >
+				<div class="input-group date col-sm-4" id="datetimepicker3">
+					<?php echo date('d-m-Y H:i', $dogodek->termin); ?>
+					
+				</div>
+			</div>
+			</td>
+			</tr>
+			
+			
+			
+			<br/>
+			<tr >
+			<td style="background: #8EE4AF;">
+			<label>Min. število udeležencev</label>
+			</td>
+			<td >
+			<?php echo $dogodek->min_udelezencev; ?>
+			</td>
+			</tr>
+			
+			
+			<tr >
+			<td style="background: #8EE4AF;">
+			<label>Max. število udeležencev</label>
+			</td>
+			<td >
+			<?php echo $dogodek->max_udelezencev; ?>
+			</td>
+			</tr>
+			
+			
+			<tr >
+			<td style="background: #8EE4AF;">
+			<label>Opis dogodka</label>
+			</td>
+			<td >
+			<?php echo $dogodek->opis; ?>
+			</td>
+			</tr>
+			
 		
 		
 		<?php 
@@ -259,7 +351,7 @@ resize: vertical;
 		{
 		?>
 		
-		<p>Ocena dogodka: <?php echo $ocena; ?></p>
+		<p style="color:yellow">Ocena dogodka: <?php echo $ocena; ?></p>
 		
 		<?php 
 		if($dogodek->prisotnost == "Y") // če je bil uporabnik prisoten lahko tudi dogodek oceni
@@ -288,21 +380,25 @@ resize: vertical;
 		
 		
 		
-		<a class="GumbObDogodkih" href="<?php echo $this->config->base_url(); ?>CtrMain">NAZAJ</a>
 		
 	
 		
-		
+	
+			
+			
+			</table>	
+		</form>
+	
 		<?php 
 		if($tipUporabnika == 1) //prikažemo seznam prijavljenih uporabnikov samo organizatorju
 		{
 		?>
-			<h3>PRIJAVLJENI NA DOGODEK</h3>
-			<?php 
+			<h3 style="color:yellow;"> <b>PRIJAVLJENI NA DOGODEK </b></h3>
+			<p style="color:yellow;" align="center"><?php 
 			foreach ($prijavljeniNaDogodek as $uporabnik) 
 			{
 				echo $uporabnik->ime." ".$uporabnik->priimek." ";
-			?>
+			?></p>
 			
 				<?php 
 				
@@ -337,9 +433,11 @@ resize: vertical;
 		
 		<br/>
 		<br/>
-	
-		
-	</div>
+
+
+
+</div>
+
 	
 	
 	<script>
