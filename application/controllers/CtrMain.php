@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR  exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CtrMain extends CI_Controller {
 	
@@ -21,17 +21,20 @@ class CtrMain extends CI_Controller {
 	
 	public function index()
 	{
+		$this->load->database();
 		$this->load->library('Context');
 		$Context = new Context();
 		
 		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
 		{
-			$this->load->database();
 			$this->load->model('ModelDogodki');
 			$ModelDogodki = new ModelDogodki();
 			
+			$idUporabnika = $Context->getIdUporabnika();
+			
 			//shranimo v data array eventov
-			$data['dogodki'] = $ModelDogodki->getVseDogodke();
+			$data['dogodki'] = $ModelDogodki->getVseDogodke($idUporabnika);
+			
 			
 			//shranimo v data tip uporabnika (0 = navaden uporabnik, 1 = admin)
 			$data['tipUporabnika'] = $Context->getTipUporabnika();
@@ -50,6 +53,38 @@ class CtrMain extends CI_Controller {
 	public function login()
 	{
 		$this->load->view('login');
+	}
+	
+	public function dogodek($idDogodka)
+	{
+		$this->load->database();
+		$this->load->library('Context');
+		$Context = new Context();
+		
+		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
+		{
+			if($Context->getTipUporabnika() == 1) //preveri če je uporabnik organizator, drugače preusmeri na glavno stran
+			{
+				$this->load->model('ModelDogodki');
+				$ModelDogodki = new ModelDogodki();
+				
+				$data['dogodek'] = $ModelDogodki->getDogodek($idDogodka); //informacije o dogodku
+				
+				$data['prijavljeniNaDogodek'] = $ModelDogodki->getPrijavljeniNaDogodek($idDogodka); //seznam vseh prijavlenih za ta dogodek
+				
+				//var_dump($data['dogodek']);
+				
+				
+				$this->load->view('dogodek', $data);
+			} else {
+				$this->load->helper('url');
+				redirect($this->config->base_url()."CtrMain");
+			}
+		} else {
+			$this->load->helper('url');
+			redirect($this->config->base_url()."CtrMain/login"); //odpre login
+		}
+		
 	}
 	
 	public function login_perform()
@@ -100,17 +135,80 @@ class CtrMain extends CI_Controller {
 			$imeDogodka = $this->input->post('imeDogodka');
 			$prostorDogodka = $this->input->post('prostorDogodka');
 			$zacetekDogodka = $this->input->post('zacetekDogodka');
-			$trajanjeDogodka = $this->input->post('trajanjeDogodka');
 			$opisDogodka = $this->input->post('opisDogodka');
+			$minUdelezencev = $this->input->post('minUdelezencev');
+			$maxUdelezencev = $this->input->post('maxUdelezencev');
 			
 			
-			$result = $ModelDogodki->dodajDogodek($imeDogodka, $prostorDogodka, $zacetekDogodka, $trajanjeDogodka, $opisDogodka);
+			//strtotime nam pretvori datum iz stringa v število (unix timestamp)
+			
+			$zacetekDogodka = $this->input->post('zacetekDogodka');
+			$zacetekDogodka = strtotime($zacetekDogodka);
+			
+			$trajanjeDogodka = $this->input->post('trajanjeDogodka');
+			$trajanjeDogodka = strtotime($trajanjeDogodka);
+			
+			$terminDogodka = $this->input->post('terminDogodka');
+			$terminDogodka = strtotime($terminDogodka);
 			
 			
+			$result = $ModelDogodki->dodajDogodek($imeDogodka, $prostorDogodka, $zacetekDogodka, $trajanjeDogodka, $terminDogodka, $minUdelezencev, $maxUdelezencev, $opisDogodka);
+			
+			echo $result;
 			/* $this->load->helper('url'); //za preusmerjanje na drugo stran
 			 if($result) {
 			 
 			 } */
+		} else {
+			$this->load->helper('url');
+			redirect($this->config->base_url()."CtrMain/login"); //odpre login
+		}
+		
+	}
+	
+	public function prijava_na_dogodek()
+	{
+		$this->load->library('Context');
+		$Context = new Context();
+		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
+		{
+			$this->load->database();
+			$this->load->model('ModelDogodki');
+			$ModelDogodki = new ModelDogodki();
+			
+			$idDogodka = $this->input->post('idDogodka');
+			$idUporabnika = $Context->getIdUporabnika();
+			
+			
+			$result = $ModelDogodki->prijavaNaDogodek($idUporabnika, $idDogodka);
+			
+			echo $result;
+			
+		} else {
+			$this->load->helper('url');
+			redirect($this->config->base_url()."CtrMain/login"); //odpre login
+		}
+		
+	}
+	
+	public function odjava_iz_dogodka()
+	{
+		$this->load->library('Context');
+		$Context = new Context();
+		if ($Context->isLoggedIn()) //preveri če je uporabnik prijavljen, else odpre login stran
+		{
+			$this->load->database();
+			$this->load->model('ModelDogodki');
+			$ModelDogodki = new ModelDogodki();
+			
+			$idDogodka = $this->input->post('idDogodka');
+			$idUporabnika = $Context->getIdUporabnika();
+			
+			
+			$result = $ModelDogodki->odjavaIzDogodka($idUporabnika, $idDogodka);
+			
+			echo $result;
+			
 		} else {
 			$this->load->helper('url');
 			redirect($this->config->base_url()."CtrMain/login"); //odpre login
