@@ -49,15 +49,6 @@
 					<?php 
 					}
 					?>
-					
-					<?php 
-					if($tipUporabnika == 1) 
-					{
-					?>
-					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>">PREGLED DOGODKA</a></td>
-					<?php
-					}
-					?>
 				</tr>
 			<?php
 			}	

@@ -61,10 +61,33 @@
 			<?php 
 			foreach ($prijavljeniNaDogodek as $uporabnik) 
 			{
-				echo $uporabnik->ime;
-				echo ", ";
-				echo $uporabnik->priimek;
-				echo "<br>";
+				echo $uporabnik->ime.", ".$uporabnik->priimek;
+			?>
+			
+				<?php 
+				
+				$trenutniCasTimestamp = time();
+				
+				if($dogodek->trajanje  < $trenutniCasTimestamp) //gumbe za prisotnost pokažemo le če je dogodek že pretekel
+				{
+					if($uporabnik->prisotnost == "N") //če 
+					{
+					?>
+						<button onclick="PotrdiPrisotnost(<?php echo $uporabnik->id; ?>, <?php echo $dogodek->id;?>)">POTRDI PRISOTNOST</button>
+						<br>
+					<?php
+					}
+					else if($uporabnik->prisotnost == "Y")
+					{
+					?>
+						<button onclick="OdpotrdiPrisotnost(<?php echo $uporabnik->id; ?>, <?php echo $dogodek->id;?>)">ODPOTRDI PRISOTNOST</button>
+						<br>
+					<?php 
+					}
+				}
+				?>
+				
+			<?php 
 			}
 			?>
 		<?php
@@ -80,6 +103,47 @@
 	
 	
 	<script>
+	function PotrdiPrisotnost(idUporabnika, idDogodka)
+	{
+		//alert(idDogodka);
+		$.ajax({
+	        url : "http://localhost/Dogodki_praktikum/CtrMain/potrdi_prisotnost",
+	        type: "POST",
+	        data: {'idUporabnika': idUporabnika, 'idDogodka': idDogodka},
+	        success: function (data) 
+	        {
+	        	if(data == 1) {
+					location.reload();
+			    } else {
+					alert("Napaka");
+				}
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+		        alert(errorThrown);
+	        }
+	    });
+	}
+	
+	function OdpotrdiPrisotnost(idUporabnika, idDogodka)
+	{
+		$.ajax({
+	        url : "http://localhost/Dogodki_praktikum/CtrMain/odpotrdi_prisotnost",
+	        type: "POST",
+	        data: {'idUporabnika': idUporabnika, 'idDogodka': idDogodka},
+	        success: function (data) 
+	        {
+	        	if(data == 1) {
+					location.reload();
+			    } else {
+					alert("Napaka");
+				}
+	        },
+	        error: function (jXHR, textStatus, errorThrown) {
+		        alert(errorThrown);
+	        }
+	    });
+	}
+	
 	function prijavaNaDogodek(idDogodka) //javaskript fukncija, ki te preko posta prijavi na dogodek 
 	{
 		//alert(idDogodka);

@@ -19,7 +19,7 @@
 			<br/>
 			
 			<label>Geslo</label>
-			<input type="text" name="geslo" id="geslo" required>
+			<input type="password" name="geslo" id="geslo" required>
 			
 			<br/>
 			<br/>
