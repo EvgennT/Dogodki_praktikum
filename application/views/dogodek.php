@@ -12,7 +12,7 @@ background: -webkit-linear-gradient(top, #066dab 16%,#066dab 16%,#c5deea 89%);
 background: linear-gradient(to bottom, #066dab 16%,#066dab 16%,#c5deea 89%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#066dab', endColorstr='#c5deea',GradientType=0 );
 }
-
+ 
 .GumbObDogodkih {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
 	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
