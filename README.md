@@ -4,11 +4,12 @@
 Spletna aplikacija zajema fukcionalnosti:
 1. registracija, prijava, odjava
 2. dva tipa uporabnikov: organizator, uporabnik
-3. dodajanje slik, urejanje dogodka, loÄevanje med prihajajoÄimi in poteklimi dogodki
+3. dodajanje slik, urejanje dogodka, loèevanje med prihajajoèimi in poteklimi dogodki
 4. ocenjevanje dogodkov, preverjanje prisotnosti
-5. sporoÄanje po e-poÅ¡ti
- Spletna aplikacija omogoÄa uporabnikom pregled preteklih in prihajajoÄih dogodkov. Uporabnikom omogoÄa, da se registrirajo na stran in se s svojim profilom tudi prijavljajo, odjavljajo na dogodke in jih, v primeru da so bili prisotni, tudi ocenijo.
+5. sporoèanje po e-pošti
+ Spletna aplikacija omogoèa uporabnikom pregled preteklih in prihajajoèih dogodkov. Uporabnikom omogoèa, da se registrirajo na stran in se s svojim profilom tudi prijavljajo, odjavljajo na dogodke in jih, v primeru da so bili prisotni, tudi ocenijo.
  
+	
  
  ## Kompatibilnost
  |    CodeIgniter    | PHP	 |		Apache	|		WAMP	 |
@@ -16,41 +17,46 @@ Spletna aplikacija zajema fukcionalnosti:
 |    3.1.9         | 5.6.35 |	2.4.33		|	3.0.6		 |
 
 
- ## Izdelano s pomoÄjo
+ ## Izdelano s pomoèjo
  * [Eclipse](https://www.eclipse.org) - Razvojno okolje.
 * [WAMP](http://www.wampserver.com/en/#download-wrapper) - Lokalni server za delo z MySQL bazo in PHP.
 * [phpMyAdmin](https://www.phpmyadmin.net) - Urejevalnik podatkovne baze.
 
 
- ## InÅ¡talacija in uporaba
- 1. Instalirajte WAMP in ga zaÅ¾enite.
-3. PoÅ¾enite Eclipse in odprite perspektivo GIT (Window>Open perspective>Other...>GIT)
+ ## Inštalacija in uporaba
+ 1. Instalirajte WAMP in ga zaenite.
+3. Poenite Eclipse in odprite perspektivo GIT (Window>Open perspective>Other...>GIT)
 4. Na GitHub repozitoriju kopirajte naslov povezave (clone & download) 
 5. V Eclipsu izberete Clone a Git repository in v primeru, da se okna ne izpolnijo, vnesite prej kopiramo povezavo  v polje URI. Next.
 5. Obklukate vse prikazane dokumente in izberite next.
 6. V polju Directory izberete browse in izberete datoteko www na lokaciji, kamor ste namestili wamp (privzeta lokacija: C:\wamp\www).
-7. Da preverite, Äe so prisotne vse datoteke, stisnete z desnim gumbom miÅ¡ke na prikazano ime projekta in nato opcijo Pull. Prikazano okno zaprete.
-8. Ob zagonu wamp se mora v orodni vrstici spodaj desno prikazati zelena ikona. Na njo stisnete z desnim gumbom miÅ¡ke in izberete opcijo Refresh.
-9. Nato ponovno stisnete na zeleno ikono programa wamp z levo tipko miÅ¡ke in izberete opcijo Localhost.
-10. Odpre se vam urejevalna stran , v kateri v spodnjem levem kotu izberete opcijo phpmyadmin (za prijavo in uporabo podatkovne baze) in se prijavite z uporabniÅ¡kim imenom root, geslo pa pustite prazno.
-11. Za vzpostavitev podatkovne baze phpMyAdmin, sledite sledeÄim navodilom.
+7. Da preverite, èe so prisotne vse datoteke, stisnete z desnim gumbom miške na prikazano ime projekta in nato opcijo Pull. Prikazano okno zaprete.
+8. Ob zagonu wamp se mora v orodni vrstici spodaj desno prikazati zelena ikona. Na njo stisnete z desnim gumbom miške in izberete opcijo Refresh.
+9. Nato ponovno stisnete na zeleno ikono programa wamp z levo tipko miške in izberete opcijo Localhost.
+10. Odpre se vam urejevalna stran , v kateri v spodnjem levem kotu izberete opcijo phpmyadmin (za prijavo in uporabo podatkovne baze) in se prijavite z uporabniškim imenom root, geslo pa pustite prazno.
+11. Za vzpostavitev podatkovne baze phpMyAdmin, sledite sledeèim navodilom.
 12. Spletna stran je na voljo pod povezavo: http://localhost/Dogodki_praktikum/
 
 
  ## Vzpostavitev podatkovne baze.
 Za vzpostavitev podatkovne baze phpMyAdmin, sledite tem navodilom.
- 1. Ko ste pognali WAMP stisnite z levo tipko miÅ¡ke na ikono in na vrhu izberete Localhost.
-2. V odprtem oknu, spodaj levo, poiÅ¡Äete povezavo phpMyAdmin.
-3. Prijavite se z uporabniÅ¡kim imenom "root".
+ 1. Ko ste pognali WAMP stisnite z levo tipko miške na ikono in na vrhu izberete Localhost.
+2. V odprtem oknu, spodaj levo, poišèete povezavo phpMyAdmin.
+3. Prijavite se z uporabniškim imenom "root".
 4. Na levi strani kliknete "Novo", da ustvarite novo bazo. Poimenujete jo praktikum.
 5. Kliknete na novo ustvarjeno bazo, v zgornji vrstivi izberete SQL in v polje prekopirate celotno vsebino datoteke "SQLstavki". Za potrditev izberite Izvedi. 
-6. Po dokonÄanih korakih ponovno poÅ¾enete WAMP in odprete spletno stran. Dostop je ustvarjen preko e-maila: admin@admin.com in gesla: admin.
+6. Po dokonèanih korakih ponovno poenete WAMP in odprete spletno stran. Dostop je ustvarjen preko e-maila: admin@admin.com in gesla: admin.
+7. Zaradi varnosti je omogoèeno dodajanje novih organizatorjev direktno v podatkovno bazo. To izvedete tako, v isto polje kot prej vsedete naslednji ukaz:
+
+```
+INSERT INTO `uporabniki` (`id`, `ime`, `priimek`, `email`, `geslo`, `tip`) VALUES ( 'številka organizatorja', 'Ime organizatorja', 'Priimek organizatorja', 'E-pošta organizatorja', 'Geslo ogranizatorja', 1)
+```
 
 
  ## Za spreminjanje kode
 1. Po kloniranju projekta odperete perspektivo PHP.
-2. V eclipse marketplace naloÅ¾ite zadnjo verzijo PHP development tools.
-3. file>import>PHP> existing composer project>next> v 2. vrstici poiÅ¡Äete lokacijo kloniranega projekta (privzeta lokacija: C:\wamp\www)>finish
+2. V eclipse marketplace naloite zadnjo verzijo PHP development tools.
+3. file>import>PHP> existing composer project>next> v 2. vrstici poišèete lokacijo kloniranega projekta (privzeta lokacija: C:\wamp\www)>finish
 4. Sprmembe potrdite z desnim klikom na projekt>team>commit>izberete vse spremembe s gumbom dveh plus (+) simboli> dodate komentar> commit&push
 
 
@@ -61,16 +67,16 @@ Za vzpostavitev podatkovne baze phpMyAdmin, sledite tem navodilom.
 4. dva tipa uporabnikov: organizator, uporabnik,
 5. dodajanje slik,
 6. urejanje dogodka, 
-7. loÄevanje med prihajajoÄimi in poteklimi dogodki,
+7. loèevanje med prihajajoèimi in poteklimi dogodki,
 8. ocenjevanje dogodkov, 
 9. preverjanje prisotnosti,
-10. sporoÄanje po e-poÅ¡ti
+10. sporoèanje po e-pošti
 
 
  ## Podatkovna baza
- | Prvotna struktura | KonÄna struktura|
+ | Prvotna struktura | Konèna struktura|
 | -------- |------|
-| <img alt="Prvi ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/Slike/E-R%20diagram-prvi.png" width="117">|<img alt="KonÄni ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/Slike/er_model_koncni.jpg" width="117"> |
+| <img alt="Prvi ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/E-R%20diagram-prvi.png" width="117">|<img alt="Konèni ER" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/er_model_koncni.jpg" width="117"> |
 
 
  ## Potek dela
@@ -82,21 +88,36 @@ Za vzpostavitev podatkovne baze phpMyAdmin, sledite tem navodilom.
 |     4   | Spremembe v bazi.	 |
 |    5    | 	Prijava in odjava z dogodka. |
 |    6    | Vpogled v dogodek, pregled prijavlenih (organizator).	 |
-|    7    | Spremembe v bazi (tip datuma, termin, min udeleÅ¾encev, max udeleÅ¾encev).	 |
+|    7    | Spremembe v bazi (tip datuma, termin, min udeleencev, max udeleencev).	 |
 |   8     | 	Dojava s strani. |
-|   9     | LoÄevanje med preteklimi in prihajajoÄi dogodki.	 |
+|   9     | Loèevanje med preteklimi in prihajajoèi dogodki.	 |
 |   10     | 	Urejanje, brisanje dogodka (organizator). |
 |     11   | 	Potrjevanje prisotnosti. |
 |     12   | Mail.	 |
 |    13    | Registracija uporabnika.	 |
 |    14    | Podajanje ocen prisotnih oseb.	Prikaz ocene na glavni strani. |
 |     15   | 	Nalaganje slik. |
-|      16  | Verzija	 |
-|     17   | Verzija	 |
-|     18   | 	Verzija |
+|      16  | Popravljanje hrošèev.	 |
+|     17   | Vizualno urejanje.	 |
 
+
+## Razporeditev dela
+
+Evgen Tušek: Back end, SQL povpraševanja, Front End (View)
+Marko Pavièeviæ: SQL povpraševanja, Front End (View), Poroèila, Dokumentacija
+Toni unec: Back End, SQL povpraševanja, Front End (View)
+
+## Prototip in konèna verzija
+
+ |    Prototip    | Konèna verzija	 |	
+| ----------------- |------|
+| <img alt="Dodajanje dogodka" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/DodajanjePC.jpg" width="117">     | <img alt="Dodajanje dogodka" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/dodajKonc.png" width="117">  |		
+|<img alt="Podrobno dogodek" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/DogodekPodrobnoPC.jpg" width="117">|<img alt="Podrobno dogodek" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/infoKonc.png" width="117"> |	
+|<img alt="Prijava" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/PrijavaPC.jpg" width="117">|<img alt="Prijava" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/prijavaKonec.png" width="117"> |
+|<img alt="Registracija" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/RegistracijaPC.jpg" width="117">|<img alt="Registracija" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/registerKonc.png" width="117"> |
+|<img alt="Pregled" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/IndexPC.jpg" width="117">|<img alt="Pregled" src="https://github.com/EvgennT/Dogodki_praktikum/blob/master/slike/pregledKonc.png" width="117"> |
 
  ## Avtorji
-[<img alt="Evgen TuÅ¡ek" src="https://avatars2.githubusercontent.com/u/39327068?s=460&v=4" width="117">](https://github.com/EvgennT)|[<img alt="Marko PaviÄeviÄ‡" src="https://avatars2.githubusercontent.com/u/33724686?s=460&v=4" width="117">](https://github.com/PavicevicMarko)|[<img alt="Toni Å½unec" src="https://avatars1.githubusercontent.com/u/33753063?s=460&v=4" width="117">](https://github.com/ZunecToni)|
+[<img alt="Evgen Tušek" src="https://avatars2.githubusercontent.com/u/39327068?s=460&v=4" width="117">](https://github.com/EvgennT)|[<img alt="Marko Pavièeviæ" src="https://avatars2.githubusercontent.com/u/33724686?s=460&v=4" width="117">](https://github.com/PavicevicMarko)|[<img alt="Toni unec" src="https://avatars1.githubusercontent.com/u/33753063?s=460&v=4" width="117">](https://github.com/ZunecToni)|
 :---: |:---: |:---: |
-[Evgen TuÅ¡ek](https://github.com/EvgennT) |[Marko PaviÄeviÄ‡](https://github.com/PavicevicMarko) |[Toni Å½unec](https://github.com/ZunecToni) |
+[Evgen Tušek](https://github.com/EvgennT) |[Marko Pavièeviæ](https://github.com/PavicevicMarko) |[Toni unec](https://github.com/ZunecToni) |
