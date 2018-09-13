@@ -7,6 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title>Welcome to CodeIgniter</title>
 
 	<style type="text/css">
+	
 
 	::selection { background-color: #f07746; color: #fff; }
 	::-moz-selection { background-color: #f07746; color: #fff; }
