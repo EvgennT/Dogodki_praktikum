@@ -175,7 +175,7 @@ h1 {
 
 <article>
   <header>
-    <h1 style="color:yellow" id="glava" >Registracija</h1>
+    <h1 style="color:white" id="glava" >Registracija</h1>
   </header>
 </article>
 	<div id="container" class="row">
@@ -219,7 +219,7 @@ h1 {
 			<td class="col-1">
 			<input placeholder="Vpišite še enkrat vaš e-mail" type="text"  class="form-control" name="emailPonovno" id="emailPonovno" required>
 			</td>
-			</tr>
+			</tr> 
 			
 			<tr class="col-1">
 			<td class="col-1" style="background: #8EE4AF;">
