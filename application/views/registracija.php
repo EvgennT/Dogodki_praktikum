@@ -320,9 +320,9 @@ h1 {
 			
 			
 			<tr class="col-1">
-			<td class="col-1"  colspan="2"   style="background: #FBEEC1;"><a style="color:red" href="<?php echo $this->config->base_url(); ?>CtrMain/login"  class="gumbDodajDogodek" >NAZAJ</a>
+			<td class="col-1"  colspan="2"   style="background: #FBEEC1;"><a class="GumbObDogodkih" href="<?php echo $this->config->base_url(); ?>CtrMain/login"   >NAZAJ</a>
 			
-					<button style="color:blue" class="gumbDodajDogodek" align="center" id="button"  type="submit">REGISTRACIJA</button>
+					<button  class="GumbObDogodkih" align="center" id="button"  type="submit">REGISTRACIJA</button>
 					
 					</td>
 			</tr>
@@ -332,8 +332,7 @@ h1 {
 		</center>
 	</div>
 
-		
-<footer class="footer-distributed">
+		<footer class="footer-distributed">
 
 			<div class="footer-right">
 
@@ -349,6 +348,7 @@ h1 {
 			</div>
 
 		</footer>
+
 		
 		
 	

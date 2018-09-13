@@ -253,22 +253,7 @@ h1 {
 		</form>
 		</center>
 	</div>
-	<footer class="footer-distributed">
-
-			<div class="footer-right">
-
-				<a href="https://github.com/EvgennT/Dogodki_praktikum"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" width="50" height="50"></img></a>
-
-			</div>
-
-			<div class="footer-left">
-
-				
-
-				<p>Dogodki &copy; 2018</p>
-			</div>
-
-		</footer>
+	
 	
 </body>
 </html>

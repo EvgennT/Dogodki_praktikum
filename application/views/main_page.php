@@ -455,13 +455,13 @@ text-transform: capitalize;
 					<td><?php echo date('d/m/Y H:i', $dogodek->trajanje); ?></td>
 					<td><?php echo date('d/m/Y H:i', $dogodek->termin);?></td>
 					
-					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>" class="GumbObDogodkih">PREGLED</a></td>
+					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/dogodek/<?php echo $dogodek->id; ?>" class="gumbDodajDogodek">PREGLED</a></td>
 					
 					<?php 
 					if($tipUporabnika == 1) 
 					{
 					?>
-					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek/<?php echo $dogodek->id; ?>" class="GumbObDogodkih">UREDI</a></td>
+					<td><a href="<?php echo $this->config->base_url(); ?>CtrMain/uredi_dogodek/<?php echo $dogodek->id; ?>" class="gumbDodajDogodek">UREDI</a></td>
 					<?php
 					}
 					?>

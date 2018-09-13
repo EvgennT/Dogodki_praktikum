@@ -346,7 +346,7 @@ resize: vertical;
 			
 			<tr >
 			<td style="background: #8EE4AF;">
-			<div class="form-group col-md-6">
+			<div >
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Začetek dogodka</label>
 				</td>
 			<td >
@@ -361,7 +361,7 @@ resize: vertical;
 			
 <tr >
 			<td style="background: #8EE4AF;">
-			<div class="form-group col-md-6">
+			<div >
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Trajanje dogodka</label>
 				</td>
 			<td >
@@ -375,7 +375,7 @@ resize: vertical;
 			
 <tr >
 			<td style="background: #8EE4AF;">
-			<div class="form-group col-md-6">
+			<div >
 				<label class="control-label col-sm-2" for="trajanjeDogodka">Termin prijave/odjave</label>
 				</td>
 			<td >
@@ -493,7 +493,7 @@ resize: vertical;
 		
 	
 			
-			<table style="background: #FBEEC1;">
+			<table style="background: #FBEEC1;" class="col-7">
 		<?php 
 		if($tipUporabnika == 1) //prikažemo seznam prijavljenih uporabnikov samo organizatorju
 		{
