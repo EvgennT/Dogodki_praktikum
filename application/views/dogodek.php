@@ -356,32 +356,53 @@ resize: vertical;
 			<?php echo $ocena; ?>
 			</td>
 			</tr>
-		
+		<tr>
+      <td  style="background: #8EE4AF;">
+    <?php 
+    $trenutniCasTimestamp = time() + 7200;
+    
+    if($dogodek->termin < $trenutniCasTimestamp) //če je timestamp trenutnega časa večji je dogodek potekel in lahko prikažemo oceno
+    {
+    ?>
+    
+    
+    
+    <?php 
+    if($dogodek->prisotnost == "Y") // če je bil uporabnik prisoten lahko tudi dogodek oceni
+    {
+    ?>
+    </td>
+    <td>
+    <label>Oceni dogodek</label><td>
+    
+    <select id="oceni">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected>5</option>
+    </select>
+      <button onclick="oceniDogodek(<?php echo $dogodek->id; ?>)">Oceni</button>
+    
+    </td>
+    <?php 
+    }
+    ?>
+    
+    
+    
+    <?php
+    }
+    ?>
+    </td>
+    </tr> 	
+
 			</table>	
 		</form>
 		
 		 
 		
-		
-		<?php 
-		if($dogodek->prisotnost == "Y") // če je bil uporabnik prisoten lahko tudi dogodek oceni
-		{
-		?>
-		
-		Oceni dogodek
-		<select id="oceni">
-		  <option value="1">1</option>
-		  <option value="2">2</option>
-		  <option value="3">3</option>
-		  <option value="4">4</option>
-		  <option value="5" selected>5</option>
-		</select>
-  		<button onclick="oceniDogodek(<?php echo $dogodek->id; ?>)">Oceni</button>
-		
-		<?php 
-		}
-		?>
-		
+
 		
 		
 		<?php
@@ -395,17 +416,17 @@ resize: vertical;
 		
 	
 			
-			
+			<table style="background: #FBEEC1;">
 		<?php 
 		if($tipUporabnika == 1) //prikažemo seznam prijavljenih uporabnikov samo organizatorju
 		{
 		?>
-			<h3 style="color:yellow;"> <b>PRIJAVLJENI NA DOGODEK </b></h3>
-			<p style="color:yellow;" align="center"><?php 
+			<tr ><h3 style="color:yellow;"> <b>PRIJAVLJENI NA DOGODEK </b></h3>
+			<td  style="background: #8EE4AF;"><p><?php 
 			foreach ($prijavljeniNaDogodek as $uporabnik) 
 			{
 				echo $uporabnik->ime." ".$uporabnik->priimek." ";
-			?></p>
+			?>
 			
 				<?php 
 				
@@ -416,14 +437,14 @@ resize: vertical;
 					if($uporabnik->prisotnost == "N") //če 
 					{
 					?>
-						<button onclick="PotrdiPrisotnost(<?php echo $uporabnik->id; ?>, <?php echo $dogodek->id;?>)">POTRDI PRISOTNOST</button>
+						<button style="color:black" onclick="PotrdiPrisotnost(<?php echo $uporabnik->id; ?>, <?php echo $dogodek->id;?>)">POTRDI PRISOTNOST</button>
 						<br>
 					<?php
 					}
 					else if($uporabnik->prisotnost == "Y")
 					{
 					?>
-						<button onclick="OdpotrdiPrisotnost(<?php echo $uporabnik->id; ?>, <?php echo $dogodek->id;?>)">ODPOTRDI PRISOTNOST</button>
+						<button style="color:black" onclick="OdpotrdiPrisotnost(<?php echo $uporabnik->id; ?>, <?php echo $dogodek->id;?>)">ODPOTRDI PRISOTNOST</button>
 						<br>
 					<?php 
 					}
@@ -433,11 +454,11 @@ resize: vertical;
 				
 			<?php 
 			}
-			?>
+			?></p></td>
 		<?php
 		}
 		?>
-		
+		</tr></table>
 		<br/>
 		<br/>
 
